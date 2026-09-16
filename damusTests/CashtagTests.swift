@@ -28,4 +28,18 @@ final class CashtagTests: XCTestCase {
     func testPunctuationBoundary() {
         XCTAssertEqual(Cashtag.extract(from: "wen $BTC? ($ETH)").map(\.symbol), ["BTC", "ETH"])
     }
+
+    func testCapsAtMaxPerNote() {
+        let tags = Cashtag.extract(from: "$BTC $ETH $SOL $ADA $XRP $BTC")
+        XCTAssertEqual(tags.map(\.symbol), ["BTC", "ETH", "SOL"])
+        XCTAssertEqual(tags.count, Cashtag.maxPerNote)
+    }
+
+    func testBelowCapUnaffected() {
+        XCTAssertEqual(Cashtag.extract(from: "$BTC $ETH").map(\.symbol), ["BTC", "ETH"])
+    }
+
+    func testZeroLimit() {
+        XCTAssertTrue(Cashtag.extract(from: "$BTC", limit: 0).isEmpty)
+    }
 }

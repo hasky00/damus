@@ -35,6 +35,9 @@ actor CashtagPriceService {
     /// How long a cached price stays fresh.
     private let ttl: TimeInterval = 60
 
+    /// How long a failed lookup is remembered before it may be retried.
+    private let failureCooldown: TimeInterval = 30
+
     private struct Entry {
         let price: CashtagPrice
         let fetchedAt: Date
@@ -42,14 +45,25 @@ actor CashtagPriceService {
 
     private var cache: [String: Entry] = [:]
     private var inflight: [String: Task<CashtagPrice, Error>] = [:]
+    /// Symbols whose last lookup failed, mapped to when it failed.
+    private var failures: [String: Date] = [:]
 
     /// Returns a price for `symbol`, from cache if fresh, otherwise fetched.
-    /// Concurrent callers for the same symbol share a single request.
+    /// Concurrent callers for the same symbol share a single request, and a
+    /// symbol that recently failed throws immediately until the cooldown ends.
+    ///
+    /// - Parameter symbol: Ticker, case-insensitive, e.g. "btc" or "BTC".
+    /// - Returns: The latest price snapshot.
+    /// - Throws: `URLError` on network/HTTP failure or cooldown, or a decoding error.
     func price(for symbol: String) async throws -> CashtagPrice {
         let key = symbol.uppercased()
 
         if let entry = cache[key], Date().timeIntervalSince(entry.fetchedAt) < ttl {
             return entry.price
+        }
+
+        if let failedAt = failures[key], Date().timeIntervalSince(failedAt) < failureCooldown {
+            throw URLError(.resourceUnavailable)
         }
 
         if let task = inflight[key] {
@@ -71,8 +85,14 @@ actor CashtagPriceService {
         inflight[key] = task
         defer { inflight[key] = nil }
 
-        let price = try await task.value
-        cache[key] = Entry(price: price, fetchedAt: Date())
-        return price
+        do {
+            let price = try await task.value
+            cache[key] = Entry(price: price, fetchedAt: Date())
+            failures[key] = nil
+            return price
+        } catch {
+            failures[key] = Date()
+            throw error
+        }
     }
 }

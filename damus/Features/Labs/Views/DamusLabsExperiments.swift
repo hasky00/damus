@@ -15,11 +15,13 @@ struct DamusLabsExperiments: View {
     @State var show_favorites_explainer: Bool = false
     @State var show_gifs_explainer: Bool = false
     @State var show_halloween_explainer: Bool = false
+    @State var show_price_cards_explainer: Bool = false
     
     let live_label = NSLocalizedString("Live", comment: "Label for a toggle that enables an experimental feature")
     let favorites_label = NSLocalizedString("Favorites", comment: "Label for a toggle that enables an experimental feature")
     let gifs_label = NSLocalizedString("GIFs", comment: "Label for a toggle that enables an experimental feature")
     let halloween_label = NSLocalizedString("Halloween profile", comment: "Label for a toggle that enables an experimental feature")
+    let price_cards_label = NSLocalizedString("Price Cards", comment: "Label for a toggle that enables an experimental feature")
     
     var body: some View {
         ScrollView {
@@ -50,6 +52,7 @@ struct DamusLabsExperiments: View {
                 LabsToggleView(toggleName: favorites_label, systemImage: "heart.fill", isOn: $settings.enable_favourites_feature, showInfo: $show_favorites_explainer)
                 LabsToggleView(toggleName: gifs_label, systemImage: "smiley", isOn: $settings.enable_gifs_feature, showInfo: $show_gifs_explainer)
                 LabsToggleView(toggleName: halloween_label, systemImage: "moon.stars.fill", isOn: $settings.enable_halloween_profile, showInfo: $show_halloween_explainer)
+                LabsToggleView(toggleName: price_cards_label, systemImage: "chart.line.uptrend.xyaxis", isOn: $settings.enable_price_cards_feature, showInfo: $show_price_cards_explainer)
 
             }
             .padding([.trailing, .leading], 20)
@@ -84,6 +87,11 @@ struct DamusLabsExperiments: View {
                 labName: halloween_label,
                 systemImage: "moon.stars.fill",
                 labDescription: NSLocalizedString("Decorates profile pages with a pulsing orange and purple ring around the profile picture and bats and pumpkins drifting over the banner. This is a local theme only you see, and it is never shown on the timeline or on notes. If Reduce Motion is on, the ring stays still and the drifting is skipped.", comment: "Damus Labs feature explanation"))
+        .sheet(isPresented: $show_price_cards_explainer) {
+            LabsExplainerView(
+                labName: price_cards_label,
+                systemImage: "chart.line.uptrend.xyaxis",
+                labDescription: NSLocalizedString("This will show a small price card, with the current price, 24h change and a sparkline, under notes that mention a ticker like $BTC. Prices are fetched from ciphering.io, a third-party service, which will see the tickers you view and your IP address. Up to 3 cards are shown per note.", comment: "Damus Labs feature explanation"))
         }
     }
 }

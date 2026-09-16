@@ -13,15 +13,23 @@ struct Cashtag: Hashable {
     /// Upper-cased ticker without the `$`, e.g. "BTC".
     let symbol: String
 
+    /// Maximum number of cashtags rendered per note. Bounds the UI and
+    /// network work a single crafted note can trigger.
+    static let maxPerNote = 3
+
     /// Matches `$` followed by 2–6 uppercase letters, bounded by non-word
     /// characters so `US$100` or `$btcx1` are ignored.
     private static let regex = try! NSRegularExpression(pattern: #"(?<![\w$])\$([A-Z]{2,6})(?![\w$])"#)
 
-    /// Extracts unique cashtags from `content`, in order of first appearance.
+    /// Extracts unique cashtags from `content`, in order of first appearance,
+    /// capped at `limit`.
     ///
-    /// - Parameter content: Raw note text.
+    /// - Parameters:
+    ///   - content: Raw note text.
+    ///   - limit: Maximum number of cashtags to return. Defaults to `maxPerNote`.
     /// - Returns: Deduplicated cashtags, or an empty array if none.
-    static func extract(from content: String) -> [Cashtag] {
+    static func extract(from content: String, limit: Int = maxPerNote) -> [Cashtag] {
+        guard limit > 0 else { return [] }
         let range = NSRange(content.startIndex..., in: content)
         var seen = Set<String>()
         var result: [Cashtag] = []
@@ -31,6 +39,7 @@ struct Cashtag: Hashable {
             let symbol = String(content[r])
             guard seen.insert(symbol).inserted else { continue }
             result.append(Cashtag(symbol: symbol))
+            if result.count >= limit { break }
         }
         return result
     }
