@@ -144,9 +144,6 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "media_previews", default_value: true)
     var media_previews: Bool
 
-    @Setting(key: "show_price_cards", default_value: false)
-    var show_price_cards: Bool
-
     @Setting(key: "show_trusted_replies_first", default_value: true)
     var show_trusted_replies_first: Bool
 
@@ -422,6 +419,10 @@ class UserSettingsStore: ObservableObject {
     /// Whether the app should show the GIF feature (Damus Labs)
     @Setting(key: "labs_experiment_gifs", default_value: false)
     var enable_gifs_feature: Bool
+
+    /// Whether notes mentioning a cashtag like `$BTC` show a price card (Damus Labs)
+    @Setting(key: "labs_experiment_price_cards", default_value: false)
+    var enable_price_cards_feature: Bool
     
     // MARK: Internal, hidden settings
     

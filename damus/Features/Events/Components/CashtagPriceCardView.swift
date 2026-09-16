@@ -11,6 +11,7 @@ import Charts
 
 /// Renders one price card per cashtag found in a note.
 struct CashtagPriceCardsView: View {
+    /// Cashtags to render, already deduplicated and capped by `Cashtag.extract`.
     let cashtags: [Cashtag]
 
     var body: some View {
@@ -62,6 +63,7 @@ struct CashtagPriceCardView: View {
             .shimmer(true)
     }
 
+    /// The loaded card: symbol, price, 24h change and optional sparkline.
     private func card(_ p: CashtagPrice) -> some View {
         HStack(spacing: 12) {
             VStack(alignment: .leading, spacing: 2) {
@@ -94,6 +96,7 @@ struct CashtagPriceCardView: View {
         .accessibilityLabel("\(p.symbol) price \(p.price), 24 hour change \(p.change24h) percent")
     }
 
+    /// Minimal line chart of recent closes, axes hidden.
     private func sparkline(_ values: [Double]) -> some View {
         Chart(Array(values.enumerated()), id: \.offset) { item in
             LineMark(x: .value("t", item.offset), y: .value("price", item.element))
@@ -106,6 +109,7 @@ struct CashtagPriceCardView: View {
         .chartYScale(domain: (values.min() ?? 0)...(values.max() ?? 1))
     }
 
+    /// Fetches the price via the shared service; marks the card failed on error.
     private func load() async {
         do {
             let p = try await CashtagPriceService.shared.price(for: cashtag.symbol)
