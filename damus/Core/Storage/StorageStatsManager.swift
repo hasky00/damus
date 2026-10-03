@@ -180,7 +180,7 @@ struct StorageStatsManager {
         }
         
         // Shared app group container (legacy nostrdb + snapshot)
-        if let groupURL = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.damus") {
+        if let groupURL = fm.containerURL(forSecurityApplicationGroupIdentifier: "group.com.hasky00.damus") {
             roots.append((label: "AppGroup", url: groupURL))
         }
         

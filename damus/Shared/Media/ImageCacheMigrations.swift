@@ -60,7 +60,7 @@ struct ImageCacheMigrations {
     
     static private func migration1KingfisherCachePath() -> String {
         // Implementation note: These are old, so they are hard-coded on purpose, because we can't change these values from the past.
-        let groupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.damus")!
+        let groupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.hasky00.damus") ?? FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         return groupURL.appendingPathComponent("ImageCache").path
     }
     
@@ -70,7 +70,7 @@ struct ImageCacheMigrations {
     /// - https://developer.apple.com/documentation/foundation/filemanager/containerurl(forsecurityapplicationgroupidentifier:)#:~:text=The%20system%20creates%20only%20the%20Library/Caches%20subdirectory%20automatically
     /// - https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/FileSystemOverview/FileSystemOverview.html#:~:text=Put%20data%20cache,files%20as%20needed.
     static func kingfisherCachePath() -> URL {
-        let groupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.DAMUS_APP_GROUP_IDENTIFIER)!
+        let groupURL = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Constants.DAMUS_APP_GROUP_IDENTIFIER) ?? FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         return groupURL
             .appendingPathComponent("Library")
             .appendingPathComponent("Caches")

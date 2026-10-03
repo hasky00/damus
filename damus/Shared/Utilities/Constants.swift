@@ -13,10 +13,10 @@ import Foundation
 /// - Force unwrapping in this class is generally ok, because the contents are static, and so we can easily provide guarantees that they will not crash the app.
 class Constants {
     //static let EXAMPLE_DEMOS: DamusState = .empty
-    static let DAMUS_APP_GROUP_IDENTIFIER: String = "group.com.damus"
+    static let DAMUS_APP_GROUP_IDENTIFIER: String = "group.com.hasky00.damus"
     static let IMAGE_CACHE_DIRNAME: String = "ImageCache"
-    static let MAIN_APP_BUNDLE_IDENTIFIER: String = "com.jb55.damus2"
-    static let NOTIFICATION_EXTENSION_BUNDLE_IDENTIFIER: String = "com.jb55.damus2.DamusNotificationService"
+    static let MAIN_APP_BUNDLE_IDENTIFIER: String = "com.hasky00.damus"
+    static let NOTIFICATION_EXTENSION_BUNDLE_IDENTIFIER: String = "com.hasky00.damus.DamusNotificationService"
     
     // MARK: Curation
     static let ONBOARDING_FOLLOW_PACK_CURATOR_PUBKEY: Pubkey = Pubkey(hex: "895c2a90a860ac18434aa69e7b0da8465721216fa36e42c022e393579c486cba")!
