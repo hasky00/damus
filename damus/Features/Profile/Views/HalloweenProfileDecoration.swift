@@ -36,17 +36,28 @@ struct HalloweenAvatarRing: View {
 
     var body: some View {
         SwiftUI.TimelineView(.animation(paused: paused || reduceMotion)) { timeline in
-            ring(pulse: reduceMotion ? 1.0 : pulse(at: timeline.date))
+            ring(pulse: reduceMotion ? 1.0 : Self.pulse(at: timeline.date))
         }
         .frame(width: diameter, height: diameter)
         .allowsHitTesting(false)
         .accessibilityHidden(true)
     }
 
-    /// Eased 0...1...0 value that completes one cycle every `pulseDuration` seconds.
-    private func pulse(at date: Date) -> Double {
-        let t = date.timeIntervalSinceReferenceDate / HalloweenTheme.pulseDuration
-        return (1.0 - cos(t * 2.0 * .pi)) / 2.0
+    /// Eased 0...1...0 value derived from wall-clock time, completing one cycle
+    /// every `pulseDuration` seconds. Cosine gives the ease-in-out shape.
+    static func pulse(at date: Date) -> Double {
+        let cycles = date.timeIntervalSinceReferenceDate / HalloweenTheme.pulseDuration
+        return (1.0 - cos(cycles * 2.0 * .pi)) / 2.0
+    }
+
+    /// Ring opacity for a pulse value: 0.6 at rest, 1.0 at the peak.
+    static func opacity(for pulse: Double) -> Double {
+        0.6 + 0.4 * pulse
+    }
+
+    /// Ring scale for a pulse value: 1.0 at rest, 1.04 at the peak.
+    static func scale(for pulse: Double) -> CGFloat {
+        1.0 + 0.04 * CGFloat(pulse)
     }
 
     private func ring(pulse: Double) -> some View {
@@ -58,7 +69,8 @@ struct HalloweenAvatarRing: View {
                 ),
                 lineWidth: HalloweenTheme.ringWidth
             )
-            .opacity(0.55 + 0.45 * pulse)
+            .opacity(Self.opacity(for: pulse))
+            .scaleEffect(Self.scale(for: pulse))
             .shadow(color: HalloweenTheme.orange.opacity(0.6 * pulse), radius: 4.0 * pulse)
     }
 }
