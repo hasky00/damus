@@ -317,6 +317,7 @@
 		4C7D097E2A0C58B900943473 /* WalletConnectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7D097D2A0C58B900943473 /* WalletConnectTests.swift */; };
 		4C7FF7D52823313F009601DB /* Mentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C7FF7D42823313F009601DB /* Mentions.swift */; };
 		4C8682872814DE470026224F /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8682862814DE470026224F /* ProfileView.swift */; };
+		A1B2C3D4E5F60718293A4B5D /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
 		4C86F7C42A76C44C00EC0817 /* ZappingNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86F7C32A76C44C00EC0817 /* ZappingNotify.swift */; };
 		4C86F7C62A76C51100EC0817 /* AttachedWalletNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C86F7C52A76C51100EC0817 /* AttachedWalletNotify.swift */; };
 		4C8D00C829DF791C0036AF10 /* CompatibleAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8D00C729DF791C0036AF10 /* CompatibleAttribute.swift */; };
@@ -1038,6 +1039,7 @@
 		82D6FC0D2CD99F7900C925F4 /* EditPictureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C7FAC29D5E9620000F946 /* EditPictureControl.swift */; };
 		82D6FC0E2CD99F7900C925F4 /* ProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2AF2280B25C500AB5EEF /* ProfilePicView.swift */; };
 		82D6FC0F2CD99F7900C925F4 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8682862814DE470026224F /* ProfileView.swift */; };
+		A1B2C3D4E5F60718293A4B5E /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
 		82D6FC102CD99F7900C925F4 /* ProfileNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9D4A62992D02B00A9A7E4 /* ProfileNameView.swift */; };
 		82D6FC112CD99F7900C925F4 /* MaybeAnonPfpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F18E329ABDE6D008C55EC /* MaybeAnonPfpView.swift */; };
 		82D6FC122CD99F7900C925F4 /* EventProfileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BB83329C12D9900FC4E37 /* EventProfileName.swift */; };
@@ -1593,6 +1595,7 @@
 		D73E5F082C6A97F4007EB227 /* EditPictureControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = F79C7FAC29D5E9620000F946 /* EditPictureControl.swift */; };
 		D73E5F092C6A97F4007EB227 /* ProfilePicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2AF2280B25C500AB5EEF /* ProfilePicView.swift */; };
 		D73E5F0A2C6A97F4007EB227 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C8682862814DE470026224F /* ProfileView.swift */; };
+		A1B2C3D4E5F60718293A4B5F /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
 		D73E5F0B2C6A97F4007EB227 /* ProfileNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB9D4A62992D02B00A9A7E4 /* ProfileNameView.swift */; };
 		D73E5F0C2C6A97F4007EB227 /* MaybeAnonPfpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9F18E329ABDE6D008C55EC /* MaybeAnonPfpView.swift */; };
 		D73E5F0D2C6A97F4007EB227 /* EventProfileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C9BB83329C12D9900FC4E37 /* EventProfileName.swift */; };
@@ -2612,6 +2615,7 @@
 		4C7D097D2A0C58B900943473 /* WalletConnectTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WalletConnectTests.swift; sourceTree = "<group>"; };
 		4C7FF7D42823313F009601DB /* Mentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mentions.swift; sourceTree = "<group>"; };
 		4C8682862814DE470026224F /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalloweenProfileDecoration.swift; sourceTree = "<group>"; };
 		4C86F7C32A76C44C00EC0817 /* ZappingNotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZappingNotify.swift; sourceTree = "<group>"; };
 		4C86F7C52A76C51100EC0817 /* AttachedWalletNotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachedWalletNotify.swift; sourceTree = "<group>"; };
 		4C8AE1182A0320BE00B944E6 /* Purple.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Purple.storekit; sourceTree = "<group>"; };
@@ -4854,6 +4858,7 @@
 				F79C7FAC29D5E9620000F946 /* EditPictureControl.swift */,
 				4CEE2AF2280B25C500AB5EEF /* ProfilePicView.swift */,
 				4C8682862814DE470026224F /* ProfileView.swift */,
+				A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */,
 				4CB9D4A62992D02B00A9A7E4 /* ProfileNameView.swift */,
 				4C9F18E329ABDE6D008C55EC /* MaybeAnonPfpView.swift */,
 				4C9BB83329C12D9900FC4E37 /* EventProfileName.swift */,
@@ -6634,6 +6639,7 @@
 				5C8F972B2EB460E6009399B1 /* LiveStreamProfile.swift in Sources */,
 				D724D8272B64B40B00ABE789 /* DamusPurpleAccountView.swift in Sources */,
 				4C8682872814DE470026224F /* ProfileView.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5D /* HalloweenProfileDecoration.swift in Sources */,
 				5C0707D12A1ECB38004E7B51 /* DamusLogoGradient.swift in Sources */,
 				4CDD1AE02A6B305F001CD4DF /* NdbTagElem.swift in Sources */,
 				4C5F9114283D694D0052CD1C /* FollowTarget.swift in Sources */,
@@ -7418,6 +7424,7 @@
 				82D6FC0D2CD99F7900C925F4 /* EditPictureControl.swift in Sources */,
 				82D6FC0E2CD99F7900C925F4 /* ProfilePicView.swift in Sources */,
 				82D6FC0F2CD99F7900C925F4 /* ProfileView.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5E /* HalloweenProfileDecoration.swift in Sources */,
 				82D6FC102CD99F7900C925F4 /* ProfileNameView.swift in Sources */,
 				D7E5B2D52EA0188200CF47AC /* StreamPipelineDiagnostics.swift in Sources */,
 				5CB017212D2D985E00A9ED05 /* CoinosButton.swift in Sources */,
@@ -7893,6 +7900,7 @@
 				D73E5F082C6A97F4007EB227 /* EditPictureControl.swift in Sources */,
 				D73E5F092C6A97F4007EB227 /* ProfilePicView.swift in Sources */,
 				D73E5F0A2C6A97F4007EB227 /* ProfileView.swift in Sources */,
+				A1B2C3D4E5F60718293A4B5F /* HalloweenProfileDecoration.swift in Sources */,
 				D73E5F0B2C6A97F4007EB227 /* ProfileNameView.swift in Sources */,
 				D73E5F0C2C6A97F4007EB227 /* MaybeAnonPfpView.swift in Sources */,
 				D73E5F0D2C6A97F4007EB227 /* EventProfileName.swift in Sources */,

@@ -423,6 +423,10 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "labs_experiment_gifs", default_value: false)
     var enable_gifs_feature: Bool
     
+    /// Whether profile pages show the Halloween avatar ring and banner particles (Damus Labs)
+    @Setting(key: "labs_experiment_halloween_profile", default_value: false)
+    var enable_halloween_profile: Bool
+    
     // MARK: Internal, hidden settings
     
     // TODO: Get rid of this once we have NostrDB query capabilities integrated

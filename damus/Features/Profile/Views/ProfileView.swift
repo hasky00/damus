@@ -77,6 +77,8 @@ struct ProfileView: View {
     @State var mute_dialog_presented: Bool = false
     @State var filter_state : FilterState = .posts
     @State var yOffset: CGFloat = 0
+    /// Whether this page is on screen; the Halloween decoration pauses while it isn't.
+    @State private var is_visible: Bool = false
 
     /// The search this profile's search button opens the filters on. Seeded with
     /// the author every time the button is tapped, so the sheet never comes back
@@ -155,6 +157,12 @@ struct ProfileView: View {
                             .aspectRatio(contentMode: .fill)
                             .frame(width: proxy.size.width, height: minY > 0 ? bannerHeight + minY : bannerHeight)
                             .clipped()
+
+                        if damus_state.settings.enable_halloween_profile {
+                            HalloweenBannerParticles(paused: !is_visible)
+                                .frame(width: proxy.size.width, height: minY > 0 ? bannerHeight + minY : bannerHeight)
+                                .clipped()
+                        }
 
                         VisualEffectView(effect: UIBlurEffect(style: .systemUltraThinMaterial)).opacity(bannerBlurViewOpacity())
                     }
@@ -350,6 +358,11 @@ struct ProfileView: View {
 
             HStack(alignment: .center) {
                 ProfilePicView(pubkey: profile.pubkey, size: pfp_size, highlight: .custom(imageBorderColor(), 4.0), profiles: damus_state.profiles, disable_animation: damus_state.settings.disable_animation, damusState: damus_state)
+                    .overlay {
+                        if damus_state.settings.enable_halloween_profile {
+                            HalloweenAvatarRing(size: pfp_size, borderWidth: 4.0, paused: !is_visible)
+                        }
+                    }
                     .padding(.top, -(pfp_size / 2.0))
                     .offset(y: pfpOffset())
                     .scaleEffect(pfpScale())
@@ -567,11 +580,13 @@ struct ProfileView: View {
             .toolbarBackground(.hidden)
             .advancedSearchScope(damus_state: damus_state, query: $search_query, isPresented: $search_filters_presented)
             .onAppear() {
+                is_visible = true
                 check_nip05_validity(pubkey: self.profile.pubkey, damus_state: self.damus_state)
                 profile.subscribe()
                 //followers.subscribe()
             }
             .onDisappear {
+                is_visible = false
                 profile.unsubscribe()
                 followers.unsubscribe()
                 // our profilemodel needs a bit more help
