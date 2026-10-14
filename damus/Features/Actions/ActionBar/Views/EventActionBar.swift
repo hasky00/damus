@@ -369,6 +369,9 @@ struct LikeButton: View {
 
     @State private var isReactionsVisible = false
 
+    // Bumped on every tap so the Halloween pumpkin spits candy
+    @State private var candyBurst = 0
+
     @State private var selectedEmoji: Emoji?
 
     // Following four are Shaka animation properties
@@ -397,7 +400,9 @@ struct LikeButton: View {
 
     var body: some View {
         Group {
-            if let liked_emoji {
+            if damus_state.settings.enable_halloween_profile {
+                HalloweenPumpkinLike(lit: liked, burst: candyBurst)
+            } else if let liked_emoji {
                 buildMaskView(for: liked_emoji)
                     .frame(width: 22, height: 20)
             } else {
@@ -421,6 +426,7 @@ struct LikeButton: View {
         .simultaneousGesture(longPressGesture())
         .highPriorityGesture(TapGesture().onEnded {
             guard !isReactionsVisible else { return }
+            candyBurst += 1
             withAnimation(Animation.easeOut(duration: 0.15)) {
                 self.action(damus_state.settings.default_emoji_reaction)
                 shouldAnimate = true

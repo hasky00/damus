@@ -210,3 +210,181 @@ struct HalloweenParticle {
     }
     .frame(height: 150)
 }
+
+// MARK: - Pumpkin like button
+
+/// Stands in for the shaka like button while the Halloween lab is on.
+/// `lit` shows a carved face once the note is liked; bump `burst` to spit candy.
+struct HalloweenPumpkinLike: View {
+    let lit: Bool
+    let burst: Int
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var candies: [HalloweenCandy] = []
+    @State private var squish = false
+    @State private var glow = false
+
+    var body: some View {
+        ZStack {
+            ForEach(candies) { candy in
+                HalloweenCandyView(candy: candy)
+            }
+            Canvas { context, size in
+                var pumpkin = context
+                pumpkin.translateBy(x: size.width / 2.0, y: size.height / 2.0 + 1.0)
+                HalloweenParticle.drawPumpkin(in: &pumpkin, size: size.width)
+                if lit {
+                    Self.drawFace(in: &pumpkin, size: size.width)
+                }
+            }
+            .frame(width: 22, height: 20)
+            .scaleEffect(squish ? 0.7 : 1.0)
+            .shadow(color: HalloweenTheme.orange.opacity(glow ? 0.9 : 0), radius: glow ? 10 : 0)
+        }
+        .onChange(of: burst) { _ in
+            spitCandy()
+        }
+    }
+
+    private func spitCandy() {
+        withAnimation(.easeOut(duration: 0.1)) { squish = true }
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.4).delay(0.1)) { squish = false }
+        withAnimation(.easeOut(duration: 0.15)) { glow = true }
+        withAnimation(.easeIn(duration: 0.6).delay(0.2)) { glow = false }
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+
+        guard !reduceMotion else { return }
+        let fresh = (0..<14).map { _ in HalloweenCandy.random() }
+        candies.append(contentsOf: fresh)
+        let ids = Set(fresh.map(\.id))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.3) {
+            candies.removeAll { ids.contains($0.id) }
+        }
+    }
+
+    /// Jack-o'-lantern face: two triangle eyes and a jagged grin.
+    static func drawFace(in context: inout GraphicsContext, size: CGFloat) {
+        let dark = Color.black.opacity(0.8)
+        var eyes = Path()
+        for sign in [-1.0, 1.0] {
+            let cx = CGFloat(sign) * size * 0.18
+            eyes.move(to: CGPoint(x: cx, y: -size * 0.22))
+            eyes.addLine(to: CGPoint(x: cx + size * 0.1, y: -size * 0.05))
+            eyes.addLine(to: CGPoint(x: cx - size * 0.1, y: -size * 0.05))
+            eyes.closeSubpath()
+        }
+        context.fill(eyes, with: .color(dark))
+
+        var grin = Path()
+        grin.move(to: CGPoint(x: -size * 0.28, y: size * 0.08))
+        grin.addLine(to: CGPoint(x: -size * 0.16, y: size * 0.2))
+        grin.addLine(to: CGPoint(x: -size * 0.06, y: size * 0.1))
+        grin.addLine(to: CGPoint(x: size * 0.06, y: size * 0.2))
+        grin.addLine(to: CGPoint(x: size * 0.16, y: size * 0.1))
+        grin.addLine(to: CGPoint(x: size * 0.28, y: size * 0.08))
+        grin.addLine(to: CGPoint(x: 0, y: size * 0.3))
+        grin.closeSubpath()
+        context.fill(grin, with: .color(dark))
+    }
+}
+
+/// One piece of candy flying out of the pumpkin.
+struct HalloweenCandy: Identifiable {
+    enum Kind {
+        case wrapped
+        case lollipop
+        case sparkle
+    }
+
+    let id = UUID()
+    let kind: Kind
+    let color: Color
+    /// Where it lands, relative to the pumpkin.
+    let dx: CGFloat
+    let dy: CGFloat
+    let spin: Double
+
+    static func random() -> HalloweenCandy {
+        let colors: [Color] = [HalloweenTheme.orange, DamusColors.purple, .white, .pink, .yellow, .green]
+        return HalloweenCandy(
+            kind: [.wrapped, .lollipop, .sparkle, .sparkle].randomElement() ?? .wrapped,
+            color: colors.randomElement() ?? HalloweenTheme.orange,
+            dx: CGFloat.random(in: -44...44),
+            dy: CGFloat.random(in: -60 ... -16),
+            spin: Double.random(in: -400...400))
+    }
+}
+
+struct HalloweenCandyView: View {
+    let candy: HalloweenCandy
+    @State private var flown = false
+
+    var body: some View {
+        Group {
+            switch candy.kind {
+            case .wrapped:
+                HStack(spacing: 0) {
+                    Triangle().frame(width: 3, height: 4)
+                    Capsule().frame(width: 7, height: 4)
+                    Triangle().rotationEffect(.degrees(180)).frame(width: 3, height: 4)
+                }
+            case .lollipop:
+                VStack(spacing: 0) {
+                    Circle().frame(width: 7, height: 7)
+                    Rectangle().fill(.white.opacity(0.8)).frame(width: 1, height: 5)
+                }
+            case .sparkle:
+                Sparkle().frame(width: 8, height: 8)
+            }
+        }
+        .foregroundColor(candy.color)
+        .shadow(color: candy.color.opacity(0.9), radius: 3)
+        .shadow(color: .black.opacity(0.25), radius: 0.5)
+        .rotationEffect(.degrees(flown ? candy.spin : 0))
+        .offset(x: flown ? candy.dx : 0, y: flown ? candy.dy : 0)
+        .opacity(flown ? 0 : 1)
+        .scaleEffect(flown ? 1.3 : 0.2)
+        .allowsHitTesting(false)
+        .accessibilityHidden(true)
+        .onAppear {
+            withAnimation(.interpolatingSpring(stiffness: 60, damping: 9).speed(0.9)) {
+                flown = true
+            }
+        }
+    }
+
+    private struct Sparkle: Shape {
+        func path(in rect: CGRect) -> Path {
+            let c = CGPoint(x: rect.midX, y: rect.midY)
+            let r = rect.width / 2.0
+            var path = Path()
+            for i in 0..<8 {
+                let angle = Double(i) * .pi / 4.0
+                let radius = i % 2 == 0 ? r : r * 0.35
+                let point = CGPoint(x: c.x + CGFloat(cos(angle)) * radius, y: c.y + CGFloat(sin(angle)) * radius)
+                if i == 0 { path.move(to: point) } else { path.addLine(to: point) }
+            }
+            path.closeSubpath()
+            return path
+        }
+    }
+
+    private struct Triangle: Shape {
+        func path(in rect: CGRect) -> Path {
+            var path = Path()
+            path.move(to: CGPoint(x: rect.maxX, y: rect.midY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+            path.closeSubpath()
+            return path
+        }
+    }
+}
+
+#Preview("Pumpkin like") {
+    HStack(spacing: 40) {
+        HalloweenPumpkinLike(lit: false, burst: 0)
+        HalloweenPumpkinLike(lit: true, burst: 0)
+    }
+    .padding(40)
+}
