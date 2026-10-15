@@ -417,9 +417,6 @@ class UserSettingsStore: ObservableObject {
     }
     
     // MARK: Damus Labs Experiments
-    @Setting(key: "live", default_value: false)
-    var live: Bool
-    
     /// Whether the app should show the Favourites feature (Damus Labs)
     @Setting(key: "labs_experiment_favorites", default_value: false)
     var enable_favourites_feature: Bool
