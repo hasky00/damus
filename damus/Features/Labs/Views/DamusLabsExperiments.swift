@@ -78,6 +78,7 @@ struct DamusLabsExperiments: View {
                 labName: halloween_label,
                 systemImage: "moon.stars.fill",
                 labDescription: NSLocalizedString("Decorates profile pages with a pulsing orange and purple ring around the profile picture and bats and pumpkins drifting over the banner. This is a local theme only you see, and it is never shown on the timeline or on notes. If Reduce Motion is on, the ring stays still and the drifting is skipped.", comment: "Damus Labs feature explanation"))
+        }
         .sheet(isPresented: $show_price_cards_explainer) {
             LabsExplainerView(
                 labName: price_cards_label,
