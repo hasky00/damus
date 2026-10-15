@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-#if canImport(HaishinKit)
+#if LIVE_BROADCAST
 import HaishinKit
 #endif
 
@@ -17,7 +17,7 @@ import HaishinKit
 /// `UserSettingsStore`; nothing is sent anywhere from this screen.
 struct LiveStreamSettingsView: View {
     @ObservedObject var settings: UserSettingsStore
-#if canImport(HaishinKit)
+#if LIVE_BROADCAST
     // The broadcaster needs the streaming library, which only the app target
     // links; the share/highlighter extensions compile this view without it.
     @StateObject private var broadcaster = LiveBroadcaster()
@@ -47,7 +47,7 @@ struct LiveStreamSettingsView: View {
                 statusRow
             }
 
-#if canImport(HaishinKit)
+#if LIVE_BROADCAST
             if settings.live_broadcast_configured {
                 Section(
                     header: Text("Test broadcast", comment: "Section title for the microphone test controls on the Go Live settings page."),
@@ -67,7 +67,7 @@ struct LiveStreamSettingsView: View {
         .navigationBarTitleDisplayMode(.large)
     }
 
-#if canImport(HaishinKit)
+#if LIVE_BROADCAST
     /// Start/Stop button plus the broadcaster's current state.
     private var broadcastRow: some View {
         HStack {
