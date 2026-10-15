@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D31554077DACB2289B6DA551 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
+		F98438EB98184B6D29DA66B9 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
+		D537AA6B83CAD7CD5895E115 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
+		5A96B4CF337D355C9FDCD908 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
+		0D986D4114713CC074DDAAB2 /* ProfanityFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */; };
+		02F030B9F1576BBCAADE8D7F /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		50305FC164A1B4C074C9B5E8 /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		F6502D2A4D7F11522F69AD79 /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		E3CCF0D7757271AC61CDF1FF /* SensitiveContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480381550FD1ADA69C77676 /* SensitiveContentTests.swift */; };
 		05FC071BB8FC2A1A63AEFF56 /* CashtagPriceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14953B4AE2A301A940E35645 /* CashtagPriceCardView.swift */; };
 		0DB500000000000000000002 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DB500000000000000000001 /* base64.c */; };
 		0DB500000000000000000003 /* base64.c in Sources */ = {isa = PBXBuildFile; fileRef = 0DB500000000000000000001 /* base64.c */; };
@@ -2213,6 +2222,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1970ECC7885AE285FD81516E /* ProfanityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilter.swift; sourceTree = "<group>"; };
+		2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilterTests.swift; sourceTree = "<group>"; };
+		4435801C597BB115B1341D6E /* SensitiveContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveContent.swift; sourceTree = "<group>"; };
+		6480381550FD1ADA69C77676 /* SensitiveContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveContentTests.swift; sourceTree = "<group>"; };
 		0557D6B7D15979C722594E6F /* NdbPruneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NdbPruneTests.swift; sourceTree = "<group>"; };
 		0DB500000000000000000001 /* base64.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = base64.c; sourceTree = "<group>"; };
 		0DB500000000000000000006 /* base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = base64.h; sourceTree = "<group>"; };
