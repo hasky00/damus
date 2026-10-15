@@ -142,6 +142,8 @@ struct AppearanceSettingsView: View {
                     .toggleStyle(.switch)
                 Toggle(NSLocalizedString("Hide notes with #nsfw tags", comment: "Setting to hide notes with the #nsfw (not safe for work) tags"), isOn: $settings.hide_nsfw_tagged_content)
                     .toggleStyle(.switch)
+                Toggle(NSLocalizedString("Cover sensitive notes", comment: "Setting to cover notes that have a content warning or #nsfw tag until tapped"), isOn: $settings.cover_sensitive_content)
+                    .toggleStyle(.switch)
                 Picker(NSLocalizedString("Profanity filter", comment: "Setting to choose how notes containing profanity are shown"),
                        selection: $settings.profanity_filter_mode) {
                     ForEach(ProfanityFilterMode.allCases) { mode in
