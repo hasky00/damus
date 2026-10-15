@@ -171,7 +171,7 @@ struct NoteContentView: View {
     }
     
     func MainContent(artifacts: NoteArtifactsSeparated) -> some View {
-        let contentToRender = highlightedContent(artifacts.content)
+        let contentToRender = highlightedContent(profanityFilteredContent(artifacts.content))
 
         return VStack(alignment: .leading) {
             if artifacts.content.attributed.characters.count != 0 {
@@ -549,6 +549,14 @@ struct NoteContentView: View {
         }
 
         return output
+    }
+
+    /// Masks profanity in `content` when the profanity filter is set to mask.
+    /// The user's own notes are never masked.
+    func profanityFilteredContent(_ content: CompatibleText) -> CompatibleText {
+        guard damus_state.settings.profanity_filter_mode == .mask,
+              event.pubkey != damus_state.pubkey else { return content }
+        return content.masking_profanity()
     }
 
     func highlightedContent(_ content: CompatibleText) -> CompatibleText {

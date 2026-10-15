@@ -142,6 +142,13 @@ struct AppearanceSettingsView: View {
                     .toggleStyle(.switch)
                 Toggle(NSLocalizedString("Hide notes with #nsfw tags", comment: "Setting to hide notes with the #nsfw (not safe for work) tags"), isOn: $settings.hide_nsfw_tagged_content)
                     .toggleStyle(.switch)
+                Picker(NSLocalizedString("Profanity filter", comment: "Setting to choose how notes containing profanity are shown"),
+                       selection: $settings.profanity_filter_mode) {
+                    ForEach(ProfanityFilterMode.allCases) { mode in
+                        Text(mode.text_description())
+                            .tag(mode)
+                    }
+                }
                 Toggle(NSLocalizedString("Hide posts with too many hashtags", comment: "Setting to hide notes that contain too many hashtags (spam)"), isOn: $settings.hide_hashtag_spam)
                     .toggleStyle(.switch)
                 if settings.hide_hashtag_spam {
