@@ -13,6 +13,9 @@ struct LiveStreamHomeView: View {
     let damus_state: DamusState
     @StateObject var model: LiveEventModel
     @Environment(\.colorScheme) var colorScheme
+#if LIVE_BROADCAST
+    @State private var showGoLive = false
+#endif
 
     func content_filter(_ fstate: FilterState) -> ((NostrEvent) -> Bool) {
         var filters = ContentFilters.defaults(damus_state: damus_state)
@@ -39,6 +42,19 @@ struct LiveStreamHomeView: View {
         .onDisappear {
             model.unsubscribe()
         }
+#if LIVE_BROADCAST
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: { showGoLive = true }) {
+                    Label(NSLocalizedString("Go Live", comment: "Toolbar button that opens the Go Live screen."), systemImage: "video.badge.plus")
+                }
+                .accessibilityLabel(NSLocalizedString("Go Live", comment: "Accessibility label for the Go Live toolbar button."))
+            }
+        }
+        .fullScreenCover(isPresented: $showGoLive) {
+            LiveBroadcastView(damus_state: damus_state, settings: damus_state.settings)
+        }
+#endif
     }
 }
 

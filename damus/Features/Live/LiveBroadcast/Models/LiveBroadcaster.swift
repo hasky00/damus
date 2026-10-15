@@ -107,6 +107,15 @@ final class LiveBroadcaster: ObservableObject {
         }
     }
 
+    /// Shows the camera in the preview without streaming, so the user can
+    /// frame themselves before going live. Safe to call before `start`.
+    func startPreview() async {
+        guard !state.isActive else { return }
+        guard await AVCaptureDevice.requestAccess(for: .video) else { return }
+        try? await configureVideo()
+        await mixer.startRunning()
+    }
+
     /// Stops the broadcast and releases the camera and microphone.
     func stop() async {
         await teardown()

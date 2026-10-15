@@ -6,9 +6,6 @@
 //
 
 import SwiftUI
-#if LIVE_BROADCAST
-import HaishinKit
-#endif
 
 /// Settings page for the "Go Live" feature.
 ///
@@ -17,11 +14,6 @@ import HaishinKit
 /// `UserSettingsStore`; nothing is sent anywhere from this screen.
 struct LiveStreamSettingsView: View {
     @ObservedObject var settings: UserSettingsStore
-#if LIVE_BROADCAST
-    // The broadcaster needs the streaming library, which only the app target
-    // links; the share/highlighter extensions compile this view without it.
-    @StateObject private var broadcaster = LiveBroadcaster()
-#endif
 
     /// Default ingest URL shown as a placeholder so the user knows the expected shape.
     private let placeholderURL = "rtmp://in.zap.stream:1935/good"
@@ -46,75 +38,10 @@ struct LiveStreamSettingsView: View {
             Section {
                 statusRow
             }
-
-#if LIVE_BROADCAST
-            if settings.live_broadcast_configured {
-                Section(
-                    header: Text("Test broadcast", comment: "Section title for the microphone test controls on the Go Live settings page."),
-                    footer: Text("Sends your camera and microphone to the server above so you can check it works. Nothing is announced on Nostr.", comment: "Explanation under the Go Live test controls.")
-                ) {
-                    broadcastRow
-                    if broadcaster.state.isActive {
-                        MTHKViewRepresentable(previewSource: broadcaster, videoGravity: .resizeAspectFill)
-                            .frame(height: 320)
-                            .listRowInsets(EdgeInsets())
-                    }
-                }
-            }
-#endif
         }
         .navigationTitle(NSLocalizedString("Go Live", comment: "Navigation title for the Go Live settings page."))
         .navigationBarTitleDisplayMode(.large)
     }
-
-#if LIVE_BROADCAST
-    /// Start/Stop button plus the broadcaster's current state.
-    private var broadcastRow: some View {
-        HStack {
-            Button(action: toggleBroadcast) {
-                Text(broadcaster.state.isActive
-                     ? NSLocalizedString("Stop", comment: "Button that stops the Go Live test broadcast.")
-                     : NSLocalizedString("Start test broadcast", comment: "Button that starts the Go Live test broadcast."))
-            }
-            .disabled(broadcaster.state == .connecting)
-            Spacer()
-            broadcastStateLabel
-        }
-        .onDisappear {
-            Task { await broadcaster.stop() }
-        }
-    }
-
-    /// Human-readable broadcaster state, coloured so "live" stands out.
-    @ViewBuilder
-    private var broadcastStateLabel: some View {
-        switch broadcaster.state {
-        case .idle:
-            EmptyView()
-        case .connecting:
-            ProgressView()
-        case .live:
-            Label(NSLocalizedString("On air", comment: "Status shown while the Go Live test broadcast is running."), systemImage: "dot.radiowaves.left.and.right")
-                .foregroundColor(.red)
-        case .error(let message):
-            Text(message)
-                .font(.caption)
-                .foregroundColor(.red)
-                .multilineTextAlignment(.trailing)
-        }
-    }
-
-    private func toggleBroadcast() {
-        Task {
-            if broadcaster.state.isActive {
-                await broadcaster.stop()
-            } else {
-                await broadcaster.start(rtmpURL: settings.live_rtmp_url, streamKey: settings.live_stream_key)
-            }
-        }
-    }
-
-#endif
 
     /// One-line summary telling the user whether the device is ready to broadcast.
     private var statusRow: some View {
