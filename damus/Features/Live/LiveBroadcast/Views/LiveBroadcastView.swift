@@ -195,7 +195,7 @@ private struct LiveBadge: View {
     let since: Date?
 
     var body: some View {
-        TimelineView(.periodic(from: .now, by: 1)) { context in
+        SwiftUI.TimelineView(.periodic(from: .now, by: 1)) { context in
             HStack(spacing: 6) {
                 Circle().fill(Color.white).frame(width: 8, height: 8)
                 Text("LIVE", comment: "Badge shown while streaming.")
