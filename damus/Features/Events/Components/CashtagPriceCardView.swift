@@ -3,7 +3,7 @@
 //  damus
 //
 //  Compact price card shown under a note that mentions a cashtag like $BTC.
-//  Price data comes from Ciphering (ciphering.io).
+//  Price data comes from Coinbase's public Exchange API.
 //
 
 import SwiftUI

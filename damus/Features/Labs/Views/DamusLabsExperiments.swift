@@ -83,7 +83,7 @@ struct DamusLabsExperiments: View {
             LabsExplainerView(
                 labName: price_cards_label,
                 systemImage: "chart.line.uptrend.xyaxis",
-                labDescription: NSLocalizedString("This will show a small price card, with the current price, 24h change and a sparkline, under notes that mention a ticker like $BTC. Prices are fetched from ciphering.io, a third-party service, which will see the tickers you view and your IP address. Up to 3 cards are shown per note.", comment: "Damus Labs feature explanation"))
+                labDescription: NSLocalizedString("This will show a small price card, with the current price, 24h change and a sparkline, under notes that mention a ticker like $BTC. Prices are fetched from Coinbase, a third-party service, which will see the tickers you view and your IP address. Up to 3 cards are shown per note.", comment: "Damus Labs feature explanation"))
         }
     }
 }
