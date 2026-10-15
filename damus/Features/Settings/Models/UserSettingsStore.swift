@@ -399,6 +399,33 @@ class UserSettingsStore: ObservableObject {
     @KeychainStorage(account: "nostr_wallet_connect")
     var nostr_wallet_connect: String? // TODO: strongly type this to WalletConnectURL
 
+    // Go Live: RTMP ingest settings for broadcasting from the device.
+    // Both live in the keychain because the stream key grants broadcast
+    // access to the user's channel.
+    @KeychainStorage(account: "live_rtmp_url")
+    var internal_live_rtmp_url: String?
+
+    @KeychainStorage(account: "live_stream_key")
+    var internal_live_stream_key: String?
+
+    /// RTMP server URL the app pushes audio/video to when going live, e.g. `rtmp://in.zap.stream/live`.
+    /// Empty when not configured.
+    var live_rtmp_url: String {
+        get { internal_live_rtmp_url ?? "" }
+        set { internal_live_rtmp_url = newValue == "" ? nil : newValue }
+    }
+
+    /// Stream key issued by the streaming provider. Empty when not configured.
+    var live_stream_key: String {
+        get { internal_live_stream_key ?? "" }
+        set { internal_live_stream_key = newValue == "" ? nil : newValue }
+    }
+
+    /// True once both an RTMP URL and a stream key are stored, i.e. the device can go live.
+    var live_broadcast_configured: Bool {
+        !live_rtmp_url.isEmpty && !live_stream_key.isEmpty
+    }
+
     var can_translate: Bool {
         switch translation_service {
         case .none:

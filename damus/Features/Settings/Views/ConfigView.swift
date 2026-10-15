@@ -31,6 +31,7 @@ struct ConfigView: View {
     private let notificationsTitle = NSLocalizedString("Notifications", comment: "Section header for Damus notifications")
     private let zapsTitle = NSLocalizedString("Zaps", comment: "Section header for zap settings")
     private let translationTitle = NSLocalizedString("Translation", comment: "Section header for text and appearance settings")
+    private let liveStreamTitle = NSLocalizedString("Go Live", comment: "Section header for live streaming settings")
     private let reactionsTitle = NSLocalizedString("Reactions", comment: "Section header for reactions settings")
     private let developerTitle = NSLocalizedString("Developer", comment: "Section header for developer settings")
     private let storageTitle = NSLocalizedString("Storage", comment: "Section header for storage usage statistics")
@@ -98,6 +99,12 @@ struct ConfigView: View {
                     if showSettingsButton(title: translationTitle){
                         NavigationLink(value: Route.TranslationSettings(settings: settings)){
                             IconLabel(translationTitle,img_name:"globe",color:.green)
+                        }
+                    }
+                    //Go Live
+                    if showSettingsButton(title: liveStreamTitle){
+                        NavigationLink(value: Route.LiveStreamSettings(settings: settings)){
+                            IconLabel(liveStreamTitle,img_name:"record",color:.red)
                         }
                     }
                     //Reactions

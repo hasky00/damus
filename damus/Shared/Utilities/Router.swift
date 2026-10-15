@@ -29,6 +29,7 @@ enum Route: Hashable {
     case NotificationSettings(settings: UserSettingsStore)
     case ZapSettings(settings: UserSettingsStore)
     case TranslationSettings(settings: UserSettingsStore)
+    case LiveStreamSettings(settings: UserSettingsStore)
     case ReactionsSettings(settings: UserSettingsStore)
     case SearchSettings(settings: UserSettingsStore)
     case DeveloperSettings(settings: UserSettingsStore)
@@ -101,6 +102,8 @@ enum Route: Hashable {
             ZapSettingsView(settings: settings)
         case .TranslationSettings(let settings):
             TranslationSettingsView(settings: settings, damus_state: damusState)
+        case .LiveStreamSettings(let settings):
+            LiveStreamSettingsView(settings: settings)
         case .ReactionsSettings(let settings):
             ReactionsSettingsView(settings: settings, damus_state: damusState)
         case .SearchSettings(let settings):
@@ -215,6 +218,8 @@ enum Route: Hashable {
             hasher.combine("zapSettings")
         case .TranslationSettings:
             hasher.combine("translationSettings")
+        case .LiveStreamSettings:
+            hasher.combine("liveStreamSettings")
         case .ReactionsSettings:
             hasher.combine("reactionsSettings")
         case .SearchSettings:
