@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7A11E5A0B1C2D3E4F5A6B721 /* LiveBroadcaster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11E5A0B1C2D3E4F5A6B720 /* LiveBroadcaster.swift */; };
+		7A11E5A0B1C2D3E4F5A6B714 /* RTMPHaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A11E5A0B1C2D3E4F5A6B713 /* RTMPHaishinKit */; };
+		7A11E5A0B1C2D3E4F5A6B712 /* HaishinKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A11E5A0B1C2D3E4F5A6B711 /* HaishinKit */; };
 		7A11E5A0B1C2D3E4F5A6B701 /* LiveStreamSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11E5A0B1C2D3E4F5A6B700 /* LiveStreamSettingsView.swift */; };
 		7A11E5A0B1C2D3E4F5A6B702 /* LiveStreamSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11E5A0B1C2D3E4F5A6B700 /* LiveStreamSettingsView.swift */; };
 		7A11E5A0B1C2D3E4F5A6B703 /* LiveStreamSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A11E5A0B1C2D3E4F5A6B700 /* LiveStreamSettingsView.swift */; };
@@ -2225,6 +2228,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7A11E5A0B1C2D3E4F5A6B720 /* LiveBroadcaster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveBroadcaster.swift; sourceTree = "<group>"; };
 		7A11E5A0B1C2D3E4F5A6B700 /* LiveStreamSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveStreamSettingsView.swift; sourceTree = "<group>"; };
 		1970ECC7885AE285FD81516E /* ProfanityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilter.swift; sourceTree = "<group>"; };
 		2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilterTests.swift; sourceTree = "<group>"; };
@@ -3240,6 +3244,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A11E5A0B1C2D3E4F5A6B714 /* RTMPHaishinKit in Frameworks */,
+				7A11E5A0B1C2D3E4F5A6B712 /* HaishinKit in Frameworks */,
 				D7840B782FA28C6500221E4D /* Sentry in Frameworks */,
 				3ACF94382DA9A52F00971A4E /* FaviconFinder in Frameworks */,
 				4C06670428FC7EC500038D2A /* Kingfisher in Frameworks */,
@@ -3322,6 +3328,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7A11E5A0B1C2D3E4F5A6B722 /* LiveBroadcast */ = {
+			isa = PBXGroup;
+			children = (
+				7A11E5A0B1C2D3E4F5A6B723 /* Models */,
+			);
+			path = LiveBroadcast;
+			sourceTree = "<group>";
+		};
+		7A11E5A0B1C2D3E4F5A6B723 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7A11E5A0B1C2D3E4F5A6B720 /* LiveBroadcaster.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0DB50000000000000000002C /* sodium */ = {
 			isa = PBXGroup;
 			children = (
@@ -5449,6 +5471,7 @@
 		5C8F97042EB45E39009399B1 /* Live */ = {
 			isa = PBXGroup;
 			children = (
+				7A11E5A0B1C2D3E4F5A6B722 /* LiveBroadcast */,
 				5C8F97062EB45E53009399B1 /* LiveStream */,
 				5C8F97052EB45E4C009399B1 /* LiveChat */,
 			);
@@ -5911,6 +5934,8 @@
 			);
 			name = damus;
 			packageProductDependencies = (
+				7A11E5A0B1C2D3E4F5A6B713 /* RTMPHaishinKit */,
+				7A11E5A0B1C2D3E4F5A6B711 /* HaishinKit */,
 				4C649880286E0EE300EAE2B3 /* secp256k1 */,
 				4C06670328FC7EC500038D2A /* Kingfisher */,
 				4C27C9312A64766F007DBC75 /* MarkdownUI */,
@@ -6128,6 +6153,7 @@
 			packageReferences = (
 				4C64987F286E0EE300EAE2B3 /* XCRemoteSwiftPackageReference "secp256k1" */,
 				4C06670228FC7EC500038D2A /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7A11E5A0B1C2D3E4F5A6B710 /* XCRemoteSwiftPackageReference "HaishinKit.swift" */,
 				4CCF9AB02A1FE80B00E03CFB /* XCRemoteSwiftPackageReference "GSPlayer" */,
 				4C27C9302A64766F007DBC75 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D7A343EC2AD0D77C00CED48B /* XCRemoteSwiftPackageReference "swift-snapshot-testing" */,
@@ -6254,6 +6280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A11E5A0B1C2D3E4F5A6B721 /* LiveBroadcaster.swift in Sources */,
 				7A11E5A0B1C2D3E4F5A6B701 /* LiveStreamSettingsView.swift in Sources */,
 				F6502D2A4D7F11522F69AD79 /* SensitiveContent.swift in Sources */,
 				5A96B4CF337D355C9FDCD908 /* ProfanityFilter.swift in Sources */,
@@ -9155,6 +9182,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7A11E5A0B1C2D3E4F5A6B710 /* XCRemoteSwiftPackageReference "HaishinKit.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/HaishinKit/HaishinKit.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.5;
+			};
+		};
 		3A0A30B92C21397A00F8C9BC /* XCRemoteSwiftPackageReference "EmojiPicker" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/tyiu/EmojiPicker.git";
@@ -9272,6 +9307,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7A11E5A0B1C2D3E4F5A6B713 /* RTMPHaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A11E5A0B1C2D3E4F5A6B710 /* XCRemoteSwiftPackageReference "HaishinKit.swift" */;
+			productName = RTMPHaishinKit;
+		};
+		7A11E5A0B1C2D3E4F5A6B711 /* HaishinKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7A11E5A0B1C2D3E4F5A6B710 /* XCRemoteSwiftPackageReference "HaishinKit.swift" */;
+			productName = HaishinKit;
+		};
 		3A0A30BA2C21397A00F8C9BC /* EmojiPicker */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 3A0A30B92C21397A00F8C9BC /* XCRemoteSwiftPackageReference "EmojiPicker" */;
