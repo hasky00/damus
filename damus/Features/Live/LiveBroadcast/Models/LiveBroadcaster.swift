@@ -10,12 +10,11 @@ import Foundation
 import HaishinKit
 import RTMPHaishinKit
 
-/// Captures the device microphone and pushes it to an RTMP server.
+/// Captures the front camera and microphone and pushes them to an RTMP server.
 ///
 /// This is the "Go Live" engine. It owns the audio session, the capture
 /// mixer and the RTMP session, and exposes a simple state machine for the UI.
-/// Audio only for now; video is added later by attaching a camera to the
-/// same mixer.
+/// It also acts as a preview source so a view can show what is being sent.
 ///
 /// All public members run on the main actor so SwiftUI can observe `state`
 /// directly. The heavy lifting (capture, encoding, networking) happens inside
@@ -42,12 +41,16 @@ final class LiveBroadcaster: ObservableObject {
 
     /// Audio bitrate in bits per second. 96 kbps AAC is plenty for voice.
     static let audioBitRate = 96_000
+    /// Portrait 720p, which is what a phone held upright produces.
+    static let videoSize = CGSize(width: 720, height: 1280)
+    /// Video bitrate in bits per second. 1.5 Mbps keeps 720p watchable on mobile data.
+    static let videoBitRate = 1_500_000
 
     private let mixer = MediaMixer()
     private var session: (any Session)?
     private var readyStateTask: Task<Void, Never>?
 
-    /// Starts broadcasting the microphone to `rtmpURL/streamKey`.
+    /// Starts broadcasting camera and microphone to `rtmpURL/streamKey`.
     ///
     /// - Parameters:
     ///   - rtmpURL: Server URL such as `rtmp://in.ca.zap.stream:1935/good`.
@@ -67,9 +70,14 @@ final class LiveBroadcaster: ObservableObject {
             state = .error(NSLocalizedString("Microphone access is off. Enable it for Damus in iOS Settings.", comment: "Go Live error shown when microphone permission is denied."))
             return
         }
+        guard await AVCaptureDevice.requestAccess(for: .video) else {
+            state = .error(NSLocalizedString("Camera access is off. Enable it for Damus in iOS Settings.", comment: "Go Live error shown when camera permission is denied."))
+            return
+        }
 
         do {
             try Self.activateAudioSession()
+            try await configureVideo()
             try await mixer.attachAudio(AVCaptureDevice.default(for: .audio))
 
             guard let session = try await SessionBuilderFactory.shared.make(url).setMode(.publish).build() else {
@@ -80,6 +88,11 @@ final class LiveBroadcaster: ObservableObject {
             var audio = await session.stream.audioSettings
             audio.bitRate = Self.audioBitRate
             try await session.stream.setAudioSettings(audio)
+
+            var video = await session.stream.videoSettings
+            video.videoSize = Self.videoSize
+            video.bitRate = Self.videoBitRate
+            try await session.stream.setVideoSettings(video)
 
             await mixer.addOutput(session.stream)
             await mixer.startRunning()
@@ -94,7 +107,7 @@ final class LiveBroadcaster: ObservableObject {
         }
     }
 
-    /// Stops the broadcast and releases the microphone.
+    /// Stops the broadcast and releases the camera and microphone.
     func stop() async {
         await teardown()
         state = .idle
@@ -117,6 +130,19 @@ final class LiveBroadcaster: ObservableObject {
         guard !trimmedServer.isEmpty, !trimmedKey.isEmpty else { return nil }
         guard let url = URL(string: trimmedServer), let scheme = url.scheme?.lowercased(), scheme == "rtmp" || scheme == "rtmps" else { return nil }
         return url.appendingPathComponent(trimmedKey)
+    }
+
+    /// Points the mixer at the front camera in portrait at the chosen size.
+    private func configureVideo() async throws {
+        await mixer.setSessionPreset(.hd1280x720)
+        await mixer.setVideoOrientation(.portrait)
+        await Task { @ScreenActor in
+            await mixer.screen.size = Self.videoSize
+        }.value
+        let camera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+        try await mixer.attachVideo(camera) { unit in
+            unit.isVideoMirrored = false
+        }
     }
 
     private static func requestMicrophonePermission() async -> Bool {
@@ -163,6 +189,14 @@ final class LiveBroadcaster: ObservableObject {
         session = nil
         await mixer.stopRunning()
         try? await mixer.attachAudio(nil)
+        try? await mixer.attachVideo(nil)
         try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+    }
+}
+
+extension LiveBroadcaster: MTHKViewRepresentable.PreviewSource {
+    /// Feeds the camera picture into a preview view.
+    nonisolated func connect(to view: MTHKView) {
+        Task { await mixer.addOutput(view) }
     }
 }

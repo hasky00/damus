@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+#if canImport(HaishinKit)
+import HaishinKit
+#endif
 
 /// Settings page for the "Go Live" feature.
 ///
@@ -48,9 +51,14 @@ struct LiveStreamSettingsView: View {
             if settings.live_broadcast_configured {
                 Section(
                     header: Text("Test broadcast", comment: "Section title for the microphone test controls on the Go Live settings page."),
-                    footer: Text("Sends your microphone to the server above so you can check it works. Nothing is announced on Nostr.", comment: "Explanation under the Go Live test controls.")
+                    footer: Text("Sends your camera and microphone to the server above so you can check it works. Nothing is announced on Nostr.", comment: "Explanation under the Go Live test controls.")
                 ) {
                     broadcastRow
+                    if broadcaster.state.isActive {
+                        MTHKViewRepresentable(previewSource: broadcaster, videoGravity: .resizeAspectFill)
+                            .frame(height: 320)
+                            .listRowInsets(EdgeInsets())
+                    }
                 }
             }
 #endif
@@ -66,7 +74,7 @@ struct LiveStreamSettingsView: View {
             Button(action: toggleBroadcast) {
                 Text(broadcaster.state.isActive
                      ? NSLocalizedString("Stop", comment: "Button that stops the Go Live test broadcast.")
-                     : NSLocalizedString("Start microphone test", comment: "Button that starts the Go Live test broadcast."))
+                     : NSLocalizedString("Start test broadcast", comment: "Button that starts the Go Live test broadcast."))
             }
             .disabled(broadcaster.state == .connecting)
             Spacer()
