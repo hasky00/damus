@@ -2158,6 +2158,10 @@
 		D537AA6B83CAD7CD5895E115 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
 		5A96B4CF337D355C9FDCD908 /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1970ECC7885AE285FD81516E /* ProfanityFilter.swift */; };
 		0D986D4114713CC074DDAAB2 /* ProfanityFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */; };
+		02F030B9F1576BBCAADE8D7F /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		50305FC164A1B4C074C9B5E8 /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		F6502D2A4D7F11522F69AD79 /* SensitiveContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4435801C597BB115B1341D6E /* SensitiveContent.swift */; };
+		E3CCF0D7757271AC61CDF1FF /* SensitiveContentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6480381550FD1ADA69C77676 /* SensitiveContentTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -3219,6 +3223,8 @@
 		DAB705000000000000000064 /* TusProcessKillTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TusProcessKillTests.swift; sourceTree = "<group>"; };
 		1970ECC7885AE285FD81516E /* ProfanityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilter.swift; sourceTree = "<group>"; };
 		2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilterTests.swift; sourceTree = "<group>"; };
+		4435801C597BB115B1341D6E /* SensitiveContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveContent.swift; sourceTree = "<group>"; };
+		6480381550FD1ADA69C77676 /* SensitiveContentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SensitiveContentTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -4268,6 +4274,7 @@
 				D72A1A012F73B9F800B0010B /* RelayPoolTests.swift */,
 				D72927AC2BAB515C00F93E90 /* RelayURLTests.swift */,
 				D753CEA92BE9DE04001C3A5D /* MutingTests.swift */,
+				6480381550FD1ADA69C77676 /* SensitiveContentTests.swift */,
 				2E98E7455F952D72CD541700 /* ProfanityFilterTests.swift */,
 				4C2D34402BDAF1B300F9FB44 /* NIP10Tests.swift */,
 				D72E12792BEEEED000F4F781 /* NostrFilterTests.swift */,
@@ -5126,6 +5133,7 @@
 			isa = PBXGroup;
 			children = (
 				D723C38D2AB8D83400065664 /* ContentFilters.swift */,
+				4435801C597BB115B1341D6E /* SensitiveContent.swift */,
 				1970ECC7885AE285FD81516E /* ProfanityFilter.swift */,
 				0E8A4BB62AE4359200065E81 /* NostrFilter+Hashable.swift */,
 				D7CB5D502B1174D100AD4105 /* FriendFilter.swift */,
@@ -6236,6 +6244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F6502D2A4D7F11522F69AD79 /* SensitiveContent.swift in Sources */,
 				5A96B4CF337D355C9FDCD908 /* ProfanityFilter.swift in Sources */,
 				3B575F3B150DACB140BAE637 /* CashtagPriceCardView.swift in Sources */,
 				BB7E27A6FC1B2EB7F4C46130 /* CashtagPriceService.swift in Sources */,
@@ -6864,6 +6873,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E3CCF0D7757271AC61CDF1FF /* SensitiveContentTests.swift in Sources */,
 				0D986D4114713CC074DDAAB2 /* ProfanityFilterTests.swift in Sources */,
 				8514543E091B03E1CD78C9A8 /* CashtagTests.swift in Sources */,
 				DAB705000000000000000065 /* TusProcessKillTests.swift in Sources */,
@@ -6978,6 +6988,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50305FC164A1B4C074C9B5E8 /* SensitiveContent.swift in Sources */,
 				D537AA6B83CAD7CD5895E115 /* ProfanityFilter.swift in Sources */,
 				CB4BCAA58E3752439E2673E3 /* CashtagPriceCardView.swift in Sources */,
 				31EAD075023F7F7BDA19CCE7 /* CashtagPriceService.swift in Sources */,
@@ -7579,6 +7590,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02F030B9F1576BBCAADE8D7F /* SensitiveContent.swift in Sources */,
 				F98438EB98184B6D29DA66B9 /* ProfanityFilter.swift in Sources */,
 				05FC071BB8FC2A1A63AEFF56 /* CashtagPriceCardView.swift in Sources */,
 				2AF093D327B65A5A210D453B /* CashtagPriceService.swift in Sources */,

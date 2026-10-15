@@ -47,6 +47,8 @@ struct NoteContentView: View {
     @State var blur_images: Bool
     @State var load_media: Bool = false
     @State private var showLinksDropdown = false
+    /// Set once the user taps "Show" on the sensitive content cover.
+    @State private var reveal_sensitive_content = false
     let size: EventViewKind
     let preview_height: CGFloat?
     let options: EventViewOptions
@@ -581,14 +583,32 @@ struct NoteContentView: View {
         }
     }
 
+    /// Why this note is covered, or nil to show its content.
+    /// The user's own notes are never covered.
+    var covered_reason: SensitiveContentReason? {
+        guard damus_state.settings.cover_sensitive_content,
+              !reveal_sensitive_content,
+              event.pubkey != damus_state.pubkey else { return nil }
+        return sensitive_content_reason(ev: event)
+    }
+
     var body: some View {
-        ArtifactContent
-            .task {
-                try? await streamProfiles()
+        Group {
+            if let reason = covered_reason {
+                SensitiveContentCover(reason: reason) {
+                    reveal_sensitive_content = true
+                }
+                .padding(.horizontal, with_padding ? 16 : 0)
+            } else {
+                ArtifactContent
             }
-            .onAppear {
-                load()
-            }
+        }
+        .task {
+            try? await streamProfiles()
+        }
+        .onAppear {
+            load()
+        }
     }
 }
 
@@ -675,6 +695,40 @@ struct BlurOverlayView: View {
         .onTapGesture {
             blur_images = false
         }
+    }
+}
+
+/// Covers a note's content when the author marked it sensitive
+/// (NIP-36 content warning or #nsfw), until the user taps "Show".
+struct SensitiveContentCover: View {
+    let reason: SensitiveContentReason
+    let reveal: () -> Void
+
+    var body: some View {
+        VStack(spacing: 8) {
+            Image(systemName: "eye.slash")
+                .font(.system(size: 22))
+                .foregroundStyle(DamusColors.neutral6)
+                .accessibilityHidden(true)
+
+            Text("Sensitive content", comment: "Title on the cover hiding a note the author marked as sensitive")
+                .font(.headline)
+
+            Text(reason.explanation)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+
+            Button(NSLocalizedString("Show", comment: "Button to reveal a note hidden by the sensitive content cover"), action: reveal)
+                .buttonStyle(.bordered)
+                .fontWeight(.semibold)
+                .padding(.top, 4)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(16)
+        .background(DamusColors.adaptableGrey)
+        .cornerRadius(12)
+        .accessibilityElement(children: .combine)
     }
 }
 
