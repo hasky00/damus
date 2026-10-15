@@ -44,7 +44,7 @@ final class LiveBroadcaster: ObservableObject {
     static let audioBitRate = 96_000
 
     private let mixer = MediaMixer()
-    private var session: (any StreamSession)?
+    private var session: (any Session)?
     private var readyStateTask: Task<Void, Never>?
 
     /// Starts broadcasting the microphone to `rtmpURL/streamKey`.
@@ -61,7 +61,7 @@ final class LiveBroadcaster: ObservableObject {
 
         state = .connecting
         // Idempotent: tells HaishinKit how to handle rtmp:// URLs.
-        await StreamSessionBuilderFactory.shared.register(RTMPSessionFactory())
+        await SessionBuilderFactory.shared.register(RTMPSessionFactory())
 
         guard await Self.requestMicrophonePermission() else {
             state = .error(NSLocalizedString("Microphone access is off. Enable it for Damus in iOS Settings.", comment: "Go Live error shown when microphone permission is denied."))
@@ -72,7 +72,7 @@ final class LiveBroadcaster: ObservableObject {
             try Self.activateAudioSession()
             try await mixer.attachAudio(AVCaptureDevice.default(for: .audio))
 
-            guard let session = try await StreamSessionBuilderFactory.shared.make(url).setMode(.publish).build() else {
+            guard let session = try await SessionBuilderFactory.shared.make(url).setMode(.publish).build() else {
                 throw BroadcastError.unsupportedURL
             }
             self.session = session
@@ -130,7 +130,7 @@ final class LiveBroadcaster: ObservableObject {
         try audioSession.setActive(true)
     }
 
-    private func observeReadyState(of session: any StreamSession) {
+    private func observeReadyState(of session: any Session) {
         readyStateTask?.cancel()
         readyStateTask = Task { [weak self] in
             for await ready in await session.readyState {
