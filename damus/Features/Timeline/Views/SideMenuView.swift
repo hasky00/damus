@@ -92,10 +92,8 @@ struct SideMenuView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             }
             
-            if damus_state.settings.live {
-                Button(action: { damus_state.nav.push(route: Route.LiveEvents(model: LiveEventModel(damus_state: damus_state))) }) {
-                    navLabel(title: NSLocalizedString("Live", comment: "Sidebar menu label for live events view."), img: "record")
-                }
+            Button(action: { damus_state.nav.push(route: Route.LiveEvents(model: LiveEventModel(damus_state: damus_state))) }) {
+                navLabel(title: NSLocalizedString("Live", comment: "Sidebar menu label for live events view."), img: "record")
             }
 
             Button(action: { damus_state.nav.push(route: Route.MuteList) }) {

@@ -153,6 +153,14 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "hide_nsfw_tagged_content", default_value: false)
     var hide_nsfw_tagged_content: Bool
 
+    /// Whether notes with a content warning or #nsfw tag are covered until tapped
+    @Setting(key: "cover_sensitive_content", default_value: true)
+    var cover_sensitive_content: Bool
+
+    /// How notes containing profanity are treated: shown, masked or hidden.
+    @StringSetting(key: "profanity_filter_mode", default_value: .off)
+    var profanity_filter_mode: ProfanityFilterMode
+
     @Setting(key: "hide_hashtag_spam", default_value: true)
     var hide_hashtag_spam: Bool
 
@@ -409,9 +417,6 @@ class UserSettingsStore: ObservableObject {
     }
     
     // MARK: Damus Labs Experiments
-    @Setting(key: "live", default_value: false)
-    var live: Bool
-    
     /// Whether the app should show the Favourites feature (Damus Labs)
     @Setting(key: "labs_experiment_favorites", default_value: false)
     var enable_favourites_feature: Bool

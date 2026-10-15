@@ -11,12 +11,10 @@ struct DamusLabsExperiments: View {
     
     let damus_state: DamusState
     @ObservedObject var settings: UserSettingsStore
-    @State var show_live_explainer: Bool = false
     @State var show_favorites_explainer: Bool = false
     @State var show_gifs_explainer: Bool = false
     @State var show_price_cards_explainer: Bool = false
     
-    let live_label = NSLocalizedString("Live", comment: "Label for a toggle that enables an experimental feature")
     let favorites_label = NSLocalizedString("Favorites", comment: "Label for a toggle that enables an experimental feature")
     let gifs_label = NSLocalizedString("GIFs", comment: "Label for a toggle that enables an experimental feature")
     let price_cards_label = NSLocalizedString("Price Cards", comment: "Label for a toggle that enables an experimental feature")
@@ -46,7 +44,6 @@ struct DamusLabsExperiments: View {
                 .cornerRadius(15)
                 .padding(.top, 10)
                 
-                LabsToggleView(toggleName: live_label, systemImage: "record.circle", isOn: $settings.live, showInfo: $show_live_explainer)
                 LabsToggleView(toggleName: favorites_label, systemImage: "heart.fill", isOn: $settings.enable_favourites_feature, showInfo: $show_favorites_explainer)
                 LabsToggleView(toggleName: gifs_label, systemImage: "smiley", isOn: $settings.enable_gifs_feature, showInfo: $show_gifs_explainer)
                 LabsToggleView(toggleName: price_cards_label, systemImage: "chart.line.uptrend.xyaxis", isOn: $settings.enable_price_cards_feature, showInfo: $show_price_cards_explainer)
@@ -61,12 +58,6 @@ struct DamusLabsExperiments: View {
                 .aspectRatio(contentMode: .fill)
         }
         .ignoresSafeArea(edges: .bottom)
-        .sheet(isPresented: $show_live_explainer) {
-            LabsExplainerView(
-                labName: live_label,
-                systemImage: "record.circle",
-                labDescription: NSLocalizedString("This will allow you to see all the real-time live streams happening on Nostr! As well as let you view and interact in the Live Chat. Please keep in mind this is still a work in progress and issues are expected. When enabled you will see the Live option in your side menu.", comment: "Damus Labs feature explanation"))
-        }
         .sheet(isPresented: $show_favorites_explainer) {
             LabsExplainerView(
                 labName: favorites_label,
@@ -83,7 +74,7 @@ struct DamusLabsExperiments: View {
             LabsExplainerView(
                 labName: price_cards_label,
                 systemImage: "chart.line.uptrend.xyaxis",
-                labDescription: NSLocalizedString("This will show a small price card, with the current price, 24h change and a sparkline, under notes that mention a ticker like $BTC. Prices are fetched from ciphering.io, a third-party service, which will see the tickers you view and your IP address. Up to 3 cards are shown per note.", comment: "Damus Labs feature explanation"))
+                labDescription: NSLocalizedString("This will show a small price card, with the current price, 24h change and a sparkline, under notes that mention a ticker like $BTC. Prices are fetched from Coinbase, a third-party service, which will see the tickers you view and your IP address. Up to 3 cards are shown per note.", comment: "Damus Labs feature explanation"))
         }
     }
 }

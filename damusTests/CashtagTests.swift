@@ -42,4 +42,23 @@ final class CashtagTests: XCTestCase {
     func testZeroLimit() {
         XCTAssertTrue(Cashtag.extract(from: "$BTC", limit: 0).isEmpty)
     }
+
+    func testParsePriceComputesChange() throws {
+        let stats = Data(#"{"open":"100.00","high":"120","low":"90","last":"110.50","volume":"1"}"#.utf8)
+        let price = try CashtagPriceService.parsePrice(symbol: "BTC", stats: stats, sparkline: nil)
+        XCTAssertEqual(price.symbol, "BTC")
+        XCTAssertEqual(price.price, 110.5)
+        XCTAssertEqual(price.change24h, 10.5, accuracy: 0.0001)
+    }
+
+    func testParsePriceRejectsNonNumeric() {
+        let stats = Data(#"{"open":"abc","last":"1"}"#.utf8)
+        XCTAssertThrowsError(try CashtagPriceService.parsePrice(symbol: "BTC", stats: stats, sparkline: nil))
+    }
+
+    func testParseSparklineIsOldestFirstCloses() throws {
+        // [time, low, high, open, close, volume], newest first
+        let candles = Data("[[3,0,0,0,30,1],[2,0,0,0,20,1],[1,0,0,0,10,1]]".utf8)
+        XCTAssertEqual(try CashtagPriceService.parseSparkline(candles), [10, 20, 30])
+    }
 }
