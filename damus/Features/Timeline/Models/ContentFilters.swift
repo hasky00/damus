@@ -123,7 +123,7 @@ extension ContentFilters {
 
     /// Returns the app's standard content filters.
     ///
-    /// The logged-in user's own events bypass NSFW and hashtag-spam filters so they remain visible on their own profile.
+    /// The logged-in user's own events bypass NSFW, profanity and hashtag-spam filters so they remain visible on their own profile.
     @MainActor
     static func defaults(damus_state: DamusState) -> [(NostrEvent) -> Bool] {
         var filters = Array<(NostrEvent) -> Bool>()
@@ -131,6 +131,12 @@ extension ContentFilters {
             filters.append { ev in
                 guard ev.pubkey != damus_state.pubkey else { return true }
                 return nsfw_tag_filter(ev: ev)
+            }
+        }
+        if damus_state.settings.profanity_filter_mode == .hide {
+            filters.append { ev in
+                guard ev.pubkey != damus_state.pubkey else { return true }
+                return profanity_filter(ev: ev)
             }
         }
         if damus_state.settings.hide_hashtag_spam {

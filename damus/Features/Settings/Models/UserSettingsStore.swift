@@ -153,6 +153,10 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "hide_nsfw_tagged_content", default_value: false)
     var hide_nsfw_tagged_content: Bool
 
+    /// How notes containing profanity are treated: shown, masked or hidden.
+    @StringSetting(key: "profanity_filter_mode", default_value: .off)
+    var profanity_filter_mode: ProfanityFilterMode
+
     @Setting(key: "hide_hashtag_spam", default_value: true)
     var hide_hashtag_spam: Bool
 
