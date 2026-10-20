@@ -26,6 +26,10 @@ struct PostingTimelineView: View {
     @State private var indicatorWidth: CGFloat = 0
     @State private var indicatorPosition: CGFloat = 0
     @State var headerHeight: CGFloat = 0
+#if LIVE_BROADCAST
+    /// Go Live screen, opened from the camera button in the header.
+    @State private var showGoLive: Bool = false
+#endif
     /// Held unobserved: it changes on every scroll frame, and only the placement modifiers
     /// on the header and the post button consume it.
     let headerOffset: HeaderOffsetModel
@@ -79,6 +83,13 @@ struct PostingTimelineView: View {
 
                     HStack(alignment: .center) {
                         SignalView(state: damus_state, signal: damus_state.nostrNetwork.signal)
+#if LIVE_BROADCAST
+                        Button(action: { showGoLive = true }) {
+                            Image(systemName: "video.fill")
+                                .foregroundColor(DamusColors.purple)
+                        }
+                        .accessibilityLabel(NSLocalizedString("Go Live", comment: "Accessibility label for the Go Live button in the home header."))
+#endif
                         if damus_state.settings.enable_favourites_feature {
                             Image(systemName: "square.stack")
                                 .foregroundColor(DamusColors.purple)
@@ -200,6 +211,11 @@ struct PostingTimelineView: View {
                 }
                 .headerOffsetPlacement(headerOffset, headerHeight: headerHeight)
         }
+#if LIVE_BROADCAST
+        .fullScreenCover(isPresented: $showGoLive) {
+            LiveBroadcastView(damus_state: damus_state, settings: damus_state.settings)
+        }
+#endif
     }
 }
 

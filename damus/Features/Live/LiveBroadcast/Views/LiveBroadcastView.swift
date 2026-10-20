@@ -38,6 +38,11 @@ struct LiveBroadcastView: View {
                 await broadcaster.startPreview()
             }
         }
+        .onChange(of: settings.live_broadcast_configured) { configured in
+            if configured {
+                Task { await broadcaster.startPreview() }
+            }
+        }
         .onDisappear {
             Task { await broadcaster.stop() }
         }
@@ -127,16 +132,86 @@ struct LiveBroadcastView: View {
         .padding(.horizontal)
     }
 
+    /// First-run guide: what you need to stream, and where to paste it.
+    /// The fields write straight into settings, so the moment both are filled the
+    /// preview appears without leaving this screen.
     private var notConfigured: some View {
-        VStack(spacing: 16) {
-            Image(systemName: "video.slash")
-                .font(.largeTitle)
-            Text("Add your streaming server and key under Settings → Go Live first.", comment: "Shown on the Go Live screen when no RTMP server is configured.")
-                .multilineTextAlignment(.center)
-            Button(NSLocalizedString("Close", comment: "Button that closes the Go Live screen."), action: close)
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                HStack {
+                    Spacer()
+                    Button(action: close) {
+                        Image(systemName: "xmark")
+                            .font(.title2)
+                            .foregroundColor(.white)
+                            .padding(8)
+                    }
+                }
+
+                Image(systemName: "video.fill")
+                    .font(.largeTitle)
+                    .frame(maxWidth: .infinity)
+
+                Text("Go live from Damus", comment: "Title of the Go Live setup guide.")
+                    .font(.title2.bold())
+                    .frame(maxWidth: .infinity)
+
+                Text("Your stream goes through zap.stream, so anyone on Nostr can watch, chat and zap. It takes one minute to set up.", comment: "Intro text of the Go Live setup guide.")
+                    .font(.subheadline)
+                    .foregroundColor(.white.opacity(0.8))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+
+                setupStep(1, NSLocalizedString("Open zap.stream and sign in with your Nostr key.", comment: "Go Live setup guide, step 1."))
+                setupStep(2, NSLocalizedString("Go to Dashboard → Stream settings and copy the Server URL and Stream key.", comment: "Go Live setup guide, step 2."))
+                setupStep(3, NSLocalizedString("Paste them here. Both are kept in your keychain.", comment: "Go Live setup guide, step 3."))
+
+                VStack(spacing: 10) {
+                    TextField("rtmp://in.zap.stream:1935/good", text: $settings.live_rtmp_url)
+                        .keyboardType(.URL)
+                        .textContentType(.URL)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                    SecureField(NSLocalizedString("Stream key", comment: "Prompt for the secret stream key in the Go Live setup guide."), text: $settings.live_stream_key)
+                        .disableAutocorrection(true)
+                        .autocapitalization(.none)
+                }
+                .textFieldStyle(.roundedBorder)
+                .foregroundColor(.black)
+
+                Link(destination: URL(string: "https://zap.stream/dashboard")!) {
+                    Text("Open zap.stream", comment: "Button in the Go Live setup guide that opens zap.stream in the browser.")
+                        .font(.headline)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(DamusColors.purple)
+                        .foregroundColor(.white)
+                        .cornerRadius(12)
+                }
+
+                Text("Once you tap Go Live, your stream shows up on zap.stream and in Nostr clients that support live streams.", comment: "Closing note of the Go Live setup guide.")
+                    .font(.footnote)
+                    .foregroundColor(.white.opacity(0.6))
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+            }
+            .padding(24)
         }
         .foregroundColor(.white)
-        .padding()
+    }
+
+    private func setupStep(_ number: Int, _ text: String) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            Text("\(number)")
+                .font(.headline)
+                .frame(width: 28, height: 28)
+                .background(DamusColors.purple)
+                .foregroundColor(.white)
+                .clipShape(Circle())
+            Text(text)
+                .font(.body)
+                .fixedSize(horizontal: false, vertical: true)
+        }
     }
 
     /// The most relevant error to show: a title-update failure first, then the broadcaster's.
