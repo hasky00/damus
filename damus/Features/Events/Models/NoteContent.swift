@@ -7,7 +7,77 @@
 
 import Foundation
 import MarkdownUI
+import SwiftUI
 import UIKit
+
+/// A span of a note's text that the author coloured with a highlighter pen.
+///
+/// Carried on a kind-1 event as a `["marker", <colour>, <text>]` tag, so
+/// clients that do not know the tag still show a perfectly normal note.
+/// The highlighted text itself is stored rather than character offsets,
+/// because the rendered string differs from the raw content (mentions become
+/// display names, whitespace is trimmed), which would make offsets drift.
+struct TextMarker: Equatable {
+    /// The tag name used on the event. Distinct from NIP-84 `highlight` events.
+    static let tagName = "marker"
+
+    /// The pen colours a user can pick from.
+    enum PenColor: String, CaseIterable {
+        case yellow
+        case pink
+
+        /// The fill drawn behind the highlighted text, tuned for both themes.
+        var background: Color {
+            switch self {
+            case .yellow:
+                return Color(UIColor { traits in
+                    traits.userInterfaceStyle == .dark
+                        ? UIColor(red: 0x8A/255.0, green: 0x6D/255.0, blue: 0x00/255.0, alpha: 1.0)
+                        : UIColor(red: 0xFF/255.0, green: 0xEB/255.0, blue: 0x3B/255.0, alpha: 1.0)
+                })
+            case .pink:
+                return Color(UIColor { traits in
+                    traits.userInterfaceStyle == .dark
+                        ? UIColor(red: 0x8C/255.0, green: 0x1E/255.0, blue: 0x5A/255.0, alpha: 1.0)
+                        : UIColor(red: 0xF8/255.0, green: 0xBB/255.0, blue: 0xD0/255.0, alpha: 1.0)
+                })
+            }
+        }
+    }
+
+    let color: PenColor
+    let text: String
+
+    /// The event tag that represents this marker.
+    var tag: [String] {
+        return [TextMarker.tagName, color.rawValue, text]
+    }
+
+    /// Reads every well-formed marker tag off `ev`. Unknown colours and empty
+    /// spans are skipped rather than failing the whole note.
+    static func parse(from ev: NostrEvent) -> [TextMarker] {
+        var markers: [TextMarker] = []
+        for tag in ev.tags {
+            guard tag.count >= 3, tag[0].matches_str(tagName) else { continue }
+            guard let color = PenColor(rawValue: tag[1].string()) else { continue }
+            let text = tag[2].string()
+            guard !text.isEmpty else { continue }
+            markers.append(TextMarker(color: color, text: text))
+        }
+        return markers
+    }
+
+    /// Paints every occurrence of each marker's text in `attributed`.
+    static func apply(_ markers: [TextMarker], to attributed: inout AttributedString) {
+        for marker in markers {
+            var searchStart = attributed.startIndex
+            while let range = attributed[searchStart...].range(of: marker.text) {
+                attributed[range].backgroundColor = marker.color.background
+                searchStart = range.upperBound
+            }
+        }
+    }
+}
 
 struct NoteArtifactsSeparated: Equatable {
     static func == (lhs: NoteArtifactsSeparated, rhs: NoteArtifactsSeparated) -> Bool {
