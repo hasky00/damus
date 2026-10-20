@@ -65,6 +65,8 @@ enum PostAction {
 struct PostView: View {
     
     @State var post: NSMutableAttributedString = NSMutableAttributedString()
+    /// The composer's current selection, for the highlighter (Damus Labs).
+    @State var selectedTextRange: NSRange = NSRange(location: 0, length: 0)
     @State var uploadedMedias: [UploadedMedia] = []
     @State var references: [RefId] = []
     /// Pubkeys that should be filtered out from the references
@@ -351,6 +353,38 @@ struct PostView: View {
         })
     }
     
+    /// Highlighter (Damus Labs): paints the selected text yellow or pink, or clears it.
+    var HighlightButton: some View {
+        Menu {
+            ForEach(TextHighlightColor.allCases) { color in
+                Button(action: { applyTextHighlight(color) }) {
+                    Label(color.label, systemImage: "circle.fill")
+                }
+            }
+            Button(action: { applyTextHighlight(nil) }) {
+                Label(NSLocalizedString("Remove highlight", comment: "Button to clear a text highlight in the composer"), systemImage: "eraser")
+            }
+        } label: {
+            Image(systemName: "highlighter")
+                .font(.system(size: 20))
+                .padding(6)
+        }
+        .disabled(selectedTextRange.length == 0)
+        .opacity(selectedTextRange.length == 0 ? 0.4 : 1.0)
+    }
+
+    func applyTextHighlight(_ color: TextHighlightColor?) {
+        let range = selectedTextRange
+        guard range.length > 0, range.upperBound <= post.length else { return }
+        let updated = NSMutableAttributedString(attributedString: post)
+        if let color {
+            updated.addTextHighlight(color, in: range)
+        } else {
+            updated.removeTextHighlight(in: range)
+        }
+        post = updated
+    }
+
     var GIFButton: some View {
         Button(action: {
             attach_gif = true
@@ -427,6 +461,9 @@ struct PostView: View {
                 CameraButton
                 if damus_state.settings.enable_gifs_feature {
                     GIFButton
+                }
+                if damus_state.settings.enable_text_highlights {
+                    HighlightButton
                 }
             }
             // Only the attachment buttons go dead during an upload. The lock decides where the note
@@ -556,6 +593,9 @@ struct PostView: View {
                     }
 
                     return user_tag_attr_string(profile: profile, pubkey: pubkey)
+                },
+                onSelectionChange: { range in
+                    self.selectedTextRange = range
                 }
             )
                 .environmentObject(tagModel)
@@ -1229,6 +1269,8 @@ func build_post(state: DamusState, post: NSAttributedString, action: PostAction,
 
     // append additional tags
     tags += uploadedMedias.compactMap { $0.metadata?.to_tag() }
+    // yellow/pink spans painted in the composer travel as `hl` tags
+    tags += post.textHighlights().map { $0.tag }
     
     switch action {
         case .highlighting(let draft):

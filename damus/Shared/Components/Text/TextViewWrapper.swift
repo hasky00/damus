@@ -19,6 +19,9 @@ struct TextViewWrapper: UIViewRepresentable {
     var getFocusWordForMention: ((String?, NSRange?) -> Void)? = nil
     let updateCursorPosition: ((Int) -> Void)
     var convertMentionRef: ((Pubkey) -> NSMutableAttributedString?)? = nil
+    /// Reports every user-driven selection change, including range selections,
+    /// so the composer can act on selected text (e.g. highlight it).
+    var onSelectionChange: ((NSRange) -> Void)? = nil
     
     func makeUIView(context: Context) -> UITextView {
         let textView = CustomPostTextView(imagePastedFromPasteboard: $imagePastedFromPasteboard,
@@ -107,7 +110,9 @@ struct TextViewWrapper: UIViewRepresentable {
     }
 
     func makeCoordinator() -> Coordinator {
-        Coordinator(attributedText: $attributedText, getFocusWordForMention: getFocusWordForMention, updateCursorPosition: updateCursorPosition, initialTextSuffix: initialTextSuffix, convertMentionRef: convertMentionRef)
+        let coordinator = Coordinator(attributedText: $attributedText, getFocusWordForMention: getFocusWordForMention, updateCursorPosition: updateCursorPosition, initialTextSuffix: initialTextSuffix, convertMentionRef: convertMentionRef)
+        coordinator.onSelectionChange = onSelectionChange
+        return coordinator
     }
 
     class Coordinator: NSObject, UITextViewDelegate {
@@ -117,6 +122,7 @@ struct TextViewWrapper: UIViewRepresentable {
         let initialTextSuffix: String?
         var initialTextSuffixWasAdded: Bool = false
         var convertMentionRef: ((Pubkey) -> NSMutableAttributedString?)? = nil
+        var onSelectionChange: ((NSRange) -> Void)? = nil
         /// True while `updateUIView` applies programmatic text/selection changes.
         ///
         /// `textViewDidChangeSelection` checks this flag so that delegate callbacks
@@ -173,7 +179,13 @@ struct TextViewWrapper: UIViewRepresentable {
         /// Programmatic selection changes are ignored while `isApplyingProgrammaticChange`
         /// is set, as are range selections, which a single index cannot represent.
         func textViewDidChangeSelection(_ textView: UITextView) {
-            guard !isApplyingProgrammaticChange, textView.selectedRange.length == 0 else { return }
+            guard !isApplyingProgrammaticChange else { return }
+            onSelectionChange?(textView.selectedRange)
+            guard textView.selectedRange.length == 0 else { return }
+            // A collapsed caret should not keep painting: typing right after a
+            // highlighted span inherits its attributes otherwise.
+            textView.typingAttributes.removeValue(forKey: .damusHighlight)
+            textView.typingAttributes.removeValue(forKey: .backgroundColor)
             updateCursorPosition(textView.selectedRange.location)
         }
 

@@ -459,6 +459,10 @@ class UserSettingsStore: ObservableObject {
     /// Whether profile pages show the Halloween avatar ring and banner particles (Damus Labs)
     @Setting(key: "labs_experiment_halloween_profile", default_value: false)
     var enable_halloween_profile: Bool
+
+    /// Whether the composer offers yellow/pink text highlights and notes render them (Damus Labs)
+    @Setting(key: "labs_experiment_text_highlights", default_value: false)
+    var enable_text_highlights: Bool
     
     // MARK: Internal, hidden settings
     

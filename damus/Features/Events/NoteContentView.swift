@@ -173,7 +173,7 @@ struct NoteContentView: View {
     }
     
     func MainContent(artifacts: NoteArtifactsSeparated) -> some View {
-        let contentToRender = highlightedContent(markerColoredContent(profanityFilteredContent(artifacts.content)))
+        let contentToRender = highlightedContent(textHighlightedContent(profanityFilteredContent(artifacts.content)))
 
         return VStack(alignment: .leading) {
             if artifacts.content.attributed.characters.count != 0 {
@@ -561,14 +561,14 @@ struct NoteContentView: View {
         return content.masking_profanity()
     }
 
-    /// Paints the author's highlighter-pen spans (`marker` tags) onto `content`.
-    /// Applied before the search-match fill so a search hit still wins on top.
-    func markerColoredContent(_ content: CompatibleText) -> CompatibleText {
-        let markers = TextMarker.parse(from: event)
-        guard !markers.isEmpty else { return content }
+    /// Paints the author's own yellow/pink highlights (`hl` tags) onto the note text.
+    func textHighlightedContent(_ content: CompatibleText) -> CompatibleText {
+        guard damus_state.settings.enable_text_highlights else { return content }
+        let highlights = TextHighlight.from(event: event)
+        guard !highlights.isEmpty else { return content }
 
         var attributed = content.attributed
-        TextMarker.apply(markers, to: &attributed)
+        TextHighlight.apply(highlights, to: &attributed)
         return CompatibleText(attributed: attributed)
     }
 
