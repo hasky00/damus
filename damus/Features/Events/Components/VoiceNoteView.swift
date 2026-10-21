@@ -30,7 +30,7 @@ struct VoiceNoteView: View {
     private var taggedDuration: TimeInterval? {
         for tag in event.tags {
             guard tag.count >= 2, tag[0].matches_str("imeta") else { continue }
-            for i in 1..<tag.count {
+            for i in 1..<Int(tag.count) {
                 let part = tag[i].string()
                 guard part.hasPrefix("duration ") else { continue }
                 return TimeInterval(part.dropFirst("duration ".count))

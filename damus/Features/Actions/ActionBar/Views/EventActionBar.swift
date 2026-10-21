@@ -38,7 +38,7 @@ struct EventActionBar: View {
     
     @State var lnurl: String? = nil
     /// Whether the hold-to-record voice reply sheet is open.
-    @State var show_voice_reply: Bool = false
+    @State var show_voice_reply_sheet: Bool = false
     
     // Fetching an LNURL is expensive enough that it can cause a hitch. Use a special backgroundable function to fetch the value.
     // Fetch on `.onAppear`
@@ -136,7 +136,7 @@ struct EventActionBar: View {
     /// Mic button, sitting right after the reply bubble: tap to open the voice reply sheet.
     var voice_reply_button: some View {
         EventActionButton(img: "microphone", col: Color.gray) {
-            show_voice_reply = true
+            show_voice_reply_sheet = true
         }
         .accessibilityLabel(NSLocalizedString("Voice reply", comment: "Accessibility label for the voice reply button"))
     }
@@ -309,7 +309,7 @@ struct EventActionBar: View {
                 ShareSheet(activityItems: [url])
             }
         }
-        .sheet(isPresented: $show_voice_reply, onDismiss: { self.show_voice_reply = false }) {
+        .sheet(isPresented: $show_voice_reply_sheet, onDismiss: { self.show_voice_reply_sheet = false }) {
             VoiceReplyView(damus_state: self.damus_state, replying_to: event)
                 .presentationDragIndicator(.visible)
         }
