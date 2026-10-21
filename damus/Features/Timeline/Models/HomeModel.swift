@@ -247,7 +247,7 @@ class HomeModel: ContactsDelegate, ObservableObject {
         }
 
         switch kind {
-        case .chat, .longform, .text, .highlight:
+        case .chat, .longform, .text, .highlight, .voice, .voice_reply:
             handle_text_event(ev, context: context)
         case .contacts:
             handle_contact_event(ev: ev)

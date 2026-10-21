@@ -66,19 +66,10 @@ class AttachMediaUtility {
              request.setValue(signature, forHTTPHeaderField: "Authorization")
         }
         
-        switch mediaToUpload {
-        case .image(let url):
-            do {
-                mediaData = try Data(contentsOf: url)
-            } catch {
-                return .failed(error)
-            }
-        case .video(let url):
-            do {
-                mediaData = try Data(contentsOf: url)
-            } catch {
-                return .failed(error)
-            }
+        do {
+            mediaData = try Data(contentsOf: mediaToUpload.localURL)
+        } catch {
+            return .failed(error)
         }
 
         guard let mediaData else {

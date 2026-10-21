@@ -37,6 +37,8 @@ struct EventActionBar: View {
     }
     
     @State var lnurl: String? = nil
+    /// Whether the hold-to-record voice reply sheet is open.
+    @State var show_voice_reply: Bool = false
     
     // Fetching an LNURL is expensive enough that it can cause a hitch. Use a special backgroundable function to fetch the value.
     // Fetch on `.onAppear`
@@ -51,6 +53,13 @@ struct EventActionBar: View {
     /// except reply publishes an event of its own, so for a note that came out of a gift wrap the
     /// button is absent rather than present and refused.
     var actions: NoteActions { NoteActions.available(on: event, keypair: damus_state.keypair) }
+
+    /// A voice reply is a public kind 1244, so it is only offered where a public reply
+    /// is, and never on a note that came out of a gift wrap (we can't sign one).
+    var show_voice_reply: Bool {
+        guard actions.contains(.reply), !event.is_rumor else { return false }
+        return damus_state.keypair.privkey != nil
+    }
 
     var show_like: Bool {
         if damus_state.settings.onlyzaps_mode {
@@ -124,6 +133,14 @@ struct EventActionBar: View {
         }
     }
     
+    /// Mic button, sitting right after the reply bubble: tap to open the voice reply sheet.
+    var voice_reply_button: some View {
+        EventActionButton(img: "microphone", col: Color.gray) {
+            show_voice_reply = true
+        }
+        .accessibilityLabel(NSLocalizedString("Voice reply", comment: "Accessibility label for the voice reply button"))
+    }
+
     var repost_button: some View {
         HStack(spacing: 4) {
             
@@ -211,6 +228,11 @@ struct EventActionBar: View {
                     if actions.contains(.reply) && !should_hide_chat_bubble {
                         self.reply_button
                     }
+
+                    if show_voice_reply && !hide_items_without_activity {
+                        self.space_if_spread
+                        self.voice_reply_button
+                    }
                     
                     if !should_hide_repost {
                         self.space_if_spread
@@ -286,6 +308,10 @@ struct EventActionBar: View {
             if let url = URL(string: "https://damus.io/" + Bech32Object.encode(.nevent(NEvent(event: event, relays: event_relay_url_strings)))) {
                 ShareSheet(activityItems: [url])
             }
+        }
+        .sheet(isPresented: $show_voice_reply, onDismiss: { self.show_voice_reply = false }) {
+            VoiceReplyView(damus_state: self.damus_state, replying_to: event)
+                .presentationDragIndicator(.visible)
         }
         .sheet(isPresented: $show_repost_action, onDismiss: { self.show_repost_action = false }) {
         

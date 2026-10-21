@@ -266,6 +266,7 @@
 		4C3BEFD22819DB9B00B3DE84 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD12819DB9B00B3DE84 /* ProfileModel.swift */; };
 		4C3BEFD42819DE8F00B3DE84 /* NostrKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD32819DE8F00B3DE84 /* NostrKind.swift */; };
 		4C3BEFD6281D995700B3DE84 /* ActionBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD5281D995700B3DE84 /* ActionBarModel.swift */; };
+		764EDF0E475E84718EC7A4A4 /* VoiceNoteRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF79B922B8953E6F9C6951 /* VoiceNoteRecorder.swift */; };
 		4C3BEFDA281DCA1400B3DE84 /* LikeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD9281DCA1400B3DE84 /* LikeCounter.swift */; };
 		4C3BEFDC281DCE6100B3DE84 /* Liked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFDB281DCE6100B3DE84 /* Liked.swift */; };
 		4C3BEFE0281DE1ED00B3DE84 /* DamusState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFDF281DE1ED00B3DE84 /* DamusState.swift */; };
@@ -496,6 +497,7 @@
 		4CEE2AF5280B29E600AB5EEF /* TimeAgo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2AF4280B29E600AB5EEF /* TimeAgo.swift */; };
 		4CEE2AF7280B2DEA00AB5EEF /* ProfileName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2AF6280B2DEA00AB5EEF /* ProfileName.swift */; };
 		4CEE2B02280B39E800AB5EEF /* EventActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2B01280B39E800AB5EEF /* EventActionBar.swift */; };
+		480A2311096970DEEB2ABC48 /* VoiceReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD60F5998608E37B2EAD53 /* VoiceReplyView.swift */; };
 		4CEF958D2A9CE650000F901B /* verifier.c in Sources */ = {isa = PBXBuildFile; fileRef = 4C4792D42A9939BD00489948 /* verifier.c */; };
 		4CF0ABD42980996B00D66079 /* Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0ABD32980996B00D66079 /* Report.swift */; };
 		4CF0ABD629817F5B00D66079 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CF0ABD529817F5B00D66079 /* ReportView.swift */; };
@@ -919,6 +921,7 @@
 		82D6FB782CD99F7900C925F4 /* ReplyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A3F92280F66F5000448DE /* ReplyMap.swift */; };
 		82D6FB792CD99F7900C925F4 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD12819DB9B00B3DE84 /* ProfileModel.swift */; };
 		82D6FB7A2CD99F7900C925F4 /* ActionBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD5281D995700B3DE84 /* ActionBarModel.swift */; };
+		0EA141B79CF7CD1B07CC2374 /* VoiceNoteRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF79B922B8953E6F9C6951 /* VoiceNoteRecorder.swift */; };
 		82D6FB7B2CD99F7900C925F4 /* LikeCounter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD9281DCA1400B3DE84 /* LikeCounter.swift */; };
 		82D6FB7C2CD99F7900C925F4 /* Liked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFDB281DCE6100B3DE84 /* Liked.swift */; };
 		82D6FB7D2CD99F7900C925F4 /* DamusState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFDF281DE1ED00B3DE84 /* DamusState.swift */; };
@@ -1111,6 +1114,7 @@
 		82D6FC422CD99F7900C925F4 /* QuoteRepostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94D6422BA5AEFE00C26EFF /* QuoteRepostsView.swift */; };
 		82D6FC432CD99F7900C925F4 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB88395296F7F8B00DC99E7 /* ReactionView.swift */; };
 		82D6FC442CD99F7900C925F4 /* EventActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2B01280B39E800AB5EEF /* EventActionBar.swift */; };
+		B990FCAE35710678A8512C26 /* VoiceReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD60F5998608E37B2EAD53 /* VoiceReplyView.swift */; };
 		82D6FC452CD99F7900C925F4 /* EventDetailBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB88388296AF99A00DC99E7 /* EventDetailBar.swift */; };
 		82D6FC462CD99F7900C925F4 /* ShareAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF72FC129B9142F00124A13 /* ShareAction.swift */; };
 		82D6FC472CD99F7900C925F4 /* RepostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1398F29F0661A00AC6A0B /* RepostAction.swift */; };
@@ -1518,6 +1522,7 @@
 		D73E5E962C6A97F4007EB227 /* ReplyMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C0A3F92280F66F5000448DE /* ReplyMap.swift */; };
 		D73E5E972C6A97F4007EB227 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD12819DB9B00B3DE84 /* ProfileModel.swift */; };
 		D73E5E982C6A97F4007EB227 /* ActionBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFD5281D995700B3DE84 /* ActionBarModel.swift */; };
+		149BAB08EA11403595FEA4D8 /* VoiceNoteRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CEF79B922B8953E6F9C6951 /* VoiceNoteRecorder.swift */; };
 		D73E5E992C6A97F4007EB227 /* Liked.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C3BEFDB281DCE6100B3DE84 /* Liked.swift */; };
 		D73E5E9A2C6A97F4007EB227 /* ProfileUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C363A912825FCF2006E126D /* ProfileUpdate.swift */; };
 		D73E5E9C2C6A97F4007EB227 /* Reply.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C363A9928283854006E126D /* Reply.swift */; };
@@ -1668,6 +1673,7 @@
 		D73E5F3D2C6A97F4007EB227 /* QuoteRepostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C94D6422BA5AEFE00C26EFF /* QuoteRepostsView.swift */; };
 		D73E5F3E2C6A97F4007EB227 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB88395296F7F8B00DC99E7 /* ReactionView.swift */; };
 		D73E5F3F2C6A97F4007EB227 /* EventActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CEE2B01280B39E800AB5EEF /* EventActionBar.swift */; };
+		43B7581C45D3331C5522F8E5 /* VoiceReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FCD60F5998608E37B2EAD53 /* VoiceReplyView.swift */; };
 		D73E5F402C6A97F5007EB227 /* EventDetailBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CB88388296AF99A00DC99E7 /* EventDetailBar.swift */; };
 		D73E5F412C6A97F5007EB227 /* ShareAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5CF72FC129B9142F00124A13 /* ShareAction.swift */; };
 		D73E5F422C6A97F5007EB227 /* RepostAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CE1398F29F0661A00AC6A0B /* RepostAction.swift */; };
@@ -2498,6 +2504,7 @@
 		4C3BEFD12819DB9B00B3DE84 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		4C3BEFD32819DE8F00B3DE84 /* NostrKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NostrKind.swift; sourceTree = "<group>"; };
 		4C3BEFD5281D995700B3DE84 /* ActionBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionBarModel.swift; sourceTree = "<group>"; };
+		2CEF79B922B8953E6F9C6951 /* VoiceNoteRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceNoteRecorder.swift; sourceTree = "<group>"; };
 		4C3BEFD9281DCA1400B3DE84 /* LikeCounter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeCounter.swift; sourceTree = "<group>"; };
 		4C3BEFDB281DCE6100B3DE84 /* Liked.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Liked.swift; sourceTree = "<group>"; };
 		4C3BEFDF281DE1ED00B3DE84 /* DamusState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DamusState.swift; sourceTree = "<group>"; };
@@ -2798,6 +2805,7 @@
 		4CEE2AF4280B29E600AB5EEF /* TimeAgo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAgo.swift; sourceTree = "<group>"; };
 		4CEE2AF6280B2DEA00AB5EEF /* ProfileName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileName.swift; sourceTree = "<group>"; };
 		4CEE2B01280B39E800AB5EEF /* EventActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventActionBar.swift; sourceTree = "<group>"; };
+		8FCD60F5998608E37B2EAD53 /* VoiceReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceReplyView.swift; sourceTree = "<group>"; };
 		4CF0ABD32980996B00D66079 /* Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Report.swift; sourceTree = "<group>"; };
 		4CF0ABD529817F5B00D66079 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		4CF0ABD72981980C00D66079 /* Lists.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lists.swift; sourceTree = "<group>"; };
@@ -5233,6 +5241,7 @@
 			isa = PBXGroup;
 			children = (
 				4CEE2B01280B39E800AB5EEF /* EventActionBar.swift */,
+				8FCD60F5998608E37B2EAD53 /* VoiceReplyView.swift */,
 				4CB88388296AF99A00DC99E7 /* EventDetailBar.swift */,
 				5CF72FC129B9142F00124A13 /* ShareAction.swift */,
 			);
@@ -5243,6 +5252,7 @@
 			isa = PBXGroup;
 			children = (
 				4C3BEFD5281D995700B3DE84 /* ActionBarModel.swift */,
+				2CEF79B922B8953E6F9C6951 /* VoiceNoteRecorder.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -6555,6 +6565,7 @@
 				D71AC4CC2BA8E3480076268E /* VisibilityTracker.swift in Sources */,
 				4CE8794829941DA700F758CC /* RelayFilters.swift in Sources */,
 				4CEE2B02280B39E800AB5EEF /* EventActionBar.swift in Sources */,
+				480A2311096970DEEB2ABC48 /* VoiceReplyView.swift in Sources */,
 				4CF480522B631C0100F2B2C0 /* invoice.c in Sources */,
 				4C3BEFE0281DE1ED00B3DE84 /* DamusState.swift in Sources */,
 				D7DB93062D66A44100DA1EE5 /* Undistractor.swift in Sources */,
@@ -6755,6 +6766,7 @@
 				4C1253682A76D2470004F4B8 /* MuteNotify.swift in Sources */,
 				4CDA128C29EB19C40006FA5A /* LocalNotification.swift in Sources */,
 				4C3BEFD6281D995700B3DE84 /* ActionBarModel.swift in Sources */,
+				764EDF0E475E84718EC7A4A4 /* VoiceNoteRecorder.swift in Sources */,
 				4C7D09762A0AF19E00943473 /* FillAndStroke.swift in Sources */,
 				D77DA2C92F19D480000B7093 /* NegentropyUtilities.swift in Sources */,
 				D7E5B2D42EA0188200CF47AC /* StreamPipelineDiagnostics.swift in Sources */,
@@ -7333,6 +7345,7 @@
 				82D6FB782CD99F7900C925F4 /* ReplyMap.swift in Sources */,
 				82D6FB792CD99F7900C925F4 /* ProfileModel.swift in Sources */,
 				82D6FB7A2CD99F7900C925F4 /* ActionBarModel.swift in Sources */,
+				0EA141B79CF7CD1B07CC2374 /* VoiceNoteRecorder.swift in Sources */,
 				82D6FB7B2CD99F7900C925F4 /* LikeCounter.swift in Sources */,
 				82D6FB7C2CD99F7900C925F4 /* Liked.swift in Sources */,
 				82D6FB7D2CD99F7900C925F4 /* DamusState.swift in Sources */,
@@ -7577,6 +7590,7 @@
 				82D6FC422CD99F7900C925F4 /* QuoteRepostsView.swift in Sources */,
 				82D6FC432CD99F7900C925F4 /* ReactionView.swift in Sources */,
 				82D6FC442CD99F7900C925F4 /* EventActionBar.swift in Sources */,
+				B990FCAE35710678A8512C26 /* VoiceReplyView.swift in Sources */,
 				82D6FC452CD99F7900C925F4 /* EventDetailBar.swift in Sources */,
 				D78F080C2D7F78EF00FC6C75 /* Request.swift in Sources */,
 				82D6FC462CD99F7900C925F4 /* ShareAction.swift in Sources */,
@@ -7837,6 +7851,7 @@
 				D73E5E972C6A97F4007EB227 /* ProfileModel.swift in Sources */,
 				D74DEC8A2DA0A19B00E69FA6 /* Ndb+.swift in Sources */,
 				D73E5E982C6A97F4007EB227 /* ActionBarModel.swift in Sources */,
+				149BAB08EA11403595FEA4D8 /* VoiceNoteRecorder.swift in Sources */,
 				D73E5E992C6A97F4007EB227 /* Liked.swift in Sources */,
 				D73E5E9A2C6A97F4007EB227 /* ProfileUpdate.swift in Sources */,
 				5CB017332D4422DB00A9ED05 /* NWCSettings.swift in Sources */,
@@ -8056,6 +8071,7 @@
 				D73E5F3D2C6A97F4007EB227 /* QuoteRepostsView.swift in Sources */,
 				D73E5F3E2C6A97F4007EB227 /* ReactionView.swift in Sources */,
 				D73E5F3F2C6A97F4007EB227 /* EventActionBar.swift in Sources */,
+				43B7581C45D3331C5522F8E5 /* VoiceReplyView.swift in Sources */,
 				5C8F97452EB461DB009399B1 /* EventTags.swift in Sources */,
 				D73E5F402C6A97F5007EB227 /* EventDetailBar.swift in Sources */,
 				5C8F972E2EB46116009399B1 /* LiveStreamStatus.swift in Sources */,
@@ -8764,7 +8780,7 @@
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Damus needs access to your media library for playback statuses";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Damus needs access to your camera in order to upload photos and scan QR codes.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Local authentication to access private key";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Damus needs access to your microphone to allow you to create video recordings that you can choose to post publicly on the network";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Damus needs access to your microphone to record voice notes and videos that you can choose to post publicly on the network";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Granting Damus access to your photos allows you to save images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -8822,7 +8838,7 @@
 				INFOPLIST_KEY_NSAppleMusicUsageDescription = "Damus needs access to your media library for playback statuses";
 				INFOPLIST_KEY_NSCameraUsageDescription = "Damus needs access to your camera in order to upload photos and scan QR codes.";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Local authentication to access private key";
-				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Damus needs access to your microphone to allow you to create video recordings that you can choose to post publicly on the network";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "Damus needs access to your microphone to record voice notes and videos that you can choose to post publicly on the network";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Granting Damus access to your photos allows you to save images.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

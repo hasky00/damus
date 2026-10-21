@@ -49,6 +49,14 @@ struct NostrPost {
             return (self.content, new_tags)
         }
 
+        if self.kind == .voice || self.kind == .voice_reply {
+            // A voice note's content is the bare audio URL; it is already described by
+            // the imeta tag, so skip the `r` tag the block parser would add for it.
+            var voice_tags = self.tags
+            addClientTagIfNeeded(clientTag, to: &voice_tags)
+            return (self.content, voice_tags)
+        }
+
         var final_tags = post_tags.tags
         addClientTagIfNeeded(clientTag, to: &final_tags)
         return (content, final_tags)

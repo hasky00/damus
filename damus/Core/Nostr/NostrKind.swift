@@ -44,6 +44,10 @@ enum NostrKind: UInt32, Codable {
     /// Its `created_at` is deliberately randomized noise (up to ~2 days off), so order
     /// conversations by the rumor's `created_at`, never the wrap's.
     case giftwrap = 1059
+    /// A NIP-A0 voice message: the content is the URL of a short audio file.
+    case voice = 1222
+    /// A NIP-A0 voice message posted as a reply to another note.
+    case voice_reply = 1244
     case live_chat = 1311
     case mute_list = 10000
     case relay_list = 10002

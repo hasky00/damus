@@ -19,6 +19,8 @@ enum PreUploadedMedia {
 enum MediaUpload {
     case image(URL)
     case video(URL)
+    /// A recorded voice note (m4a / AAC).
+    case audio(URL)
 
     var genericFileName: String {
         "damus_generic_filename.\(file_extension)"
@@ -30,6 +32,8 @@ enum MediaUpload {
             return url.pathExtension
         case .video(let url):
             return url.pathExtension
+        case .audio(let url):
+            return url.pathExtension
         }
     }
 
@@ -38,6 +42,8 @@ enum MediaUpload {
         case .image(let url):
             return url
         case .video(let url):
+            return url
+        case .audio(let url):
             return url
         }
     }
@@ -66,12 +72,18 @@ enum MediaUpload {
                 return "video/ogg"
             case "webm":
                 return "video/webm"
+            case "m4a":
+                return "audio/mp4"
+            case "mp3":
+                return "audio/mpeg"
             default:
                 switch self {
                     case .image:
                         return "image/jpg"
                     case .video:
                         return "video/mp4"
+                    case .audio:
+                        return "audio/mp4"
                 }
         }
     }
