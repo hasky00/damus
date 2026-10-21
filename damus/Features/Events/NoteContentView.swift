@@ -154,7 +154,10 @@ struct NoteContentView: View {
     
     func previewView(links: [URL]) -> some View {
         Group {
-            if let preview = self.preview {
+            if let spotify = SpotifyLink.first(in: links), !options.contains(.no_media) {
+                // A Spotify link gets its own player card instead of the generic preview.
+                SpotifyEmbedView(link: spotify)
+            } else if let preview = self.preview {
                 if let preview_height {
                     preview
                         .frame(height: preview_height)
