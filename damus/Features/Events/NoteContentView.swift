@@ -152,9 +152,18 @@ struct NoteContentView: View {
         TranslateView(damus_state: damus_state, event: event, size: self.size, isAppleTranslationPopoverPresented: $isAppleTranslationPopoverPresented)
     }
     
+    /// The Spotify link to show as a player card, from the parsed URLs or, failing
+    /// that, straight from the note text.
+    var spotify_link: SpotifyLink? {
+        if case .separated(let separated) = note_artifacts, let link = SpotifyLink.first(in: separated.links) {
+            return link
+        }
+        return SpotifyLink.first(inContent: event.get_content(damus_state.keypair))
+    }
+
     func previewView(links: [URL]) -> some View {
         Group {
-            if let spotify = SpotifyLink.first(in: links), !options.contains(.no_media) {
+            if let spotify = spotify_link, !options.contains(.no_media) {
                 // A Spotify link gets its own player card instead of the generic preview.
                 SpotifyEmbedView(link: spotify)
             } else if let preview = self.preview {

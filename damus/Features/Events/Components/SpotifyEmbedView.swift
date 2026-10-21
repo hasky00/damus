@@ -60,6 +60,21 @@ struct SpotifyLink: Equatable {
         }
         return nil
     }
+
+    /// Scans raw note text for the first Spotify link. Used as a fallback so the
+    /// card does not depend on the note's parsed URL list being ready.
+    static func first(inContent content: String) -> SpotifyLink? {
+        let pattern = #"https?://(?:open|play)\.spotify\.com/\S+|spotify:(?:track|album|playlist|artist|show|episode):[A-Za-z0-9]+"#
+        guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
+        let range = NSRange(content.startIndex..., in: content)
+        for match in regex.matches(in: content, range: range) {
+            guard let r = Range(match.range, in: content) else { continue }
+            let raw = content[r].trimmingCharacters(in: CharacterSet(charactersIn: ".,;:!?)]}\"'"))
+            guard let url = URL(string: String(raw)), let link = SpotifyLink(url: url) else { continue }
+            return link
+        }
+        return nil
+    }
 }
 
 /// Shows a Spotify link as its embed player: cover art, title, artist and a
