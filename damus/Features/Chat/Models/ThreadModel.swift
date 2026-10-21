@@ -91,14 +91,14 @@ class ThreadModel: ObservableObject {
         let thread_id = original_event.thread_id()
 
         ref_events.referenced_ids = [thread_id, original_event.id]
-        ref_events.kinds = [.text]
+        ref_events.kinds = [.text, .voice_reply]
         ref_events.limit = 1000
         
         event_filter.ids = [thread_id, original_event.id]
         
         meta_events.referenced_ids = [original_event.id]
 
-        var kinds: [NostrKind] = [.zap, .text, .boost]
+        var kinds: [NostrKind] = [.zap, .text, .voice_reply, .boost]
         if !damus_state.settings.onlyzaps_mode {
             kinds.append(.like)
         }

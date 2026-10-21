@@ -74,7 +74,7 @@ class ProfileModel: ObservableObject, Equatable {
         print("subscribing to profile \(pubkey)")
         listener?.cancel()
         listener = Task {
-            var text_filter = NostrFilter(kinds: [.text, .longform, .highlight])
+            var text_filter = NostrFilter(kinds: [.text, .longform, .highlight, .voice, .voice_reply])
             text_filter.authors = [pubkey]
             text_filter.limit = 500
             await bumpUpProgress()

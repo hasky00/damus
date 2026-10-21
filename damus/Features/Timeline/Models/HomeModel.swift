@@ -611,6 +611,7 @@ class HomeModel: ContactsDelegate, ObservableObject {
 
         var notifications_filter_kinds: [NostrKind] = [
             .text,
+            .voice_reply,
             .boost,
             .zap,
         ]
@@ -779,7 +780,7 @@ class HomeModel: ContactsDelegate, ObservableObject {
     func subscribe_to_home_filters(friends fs: [Pubkey]? = nil) {
         // TODO: separate likes?
         var home_filter_kinds: [NostrKind] = [
-            .text, .longform, .boost, .highlight
+            .text, .longform, .boost, .highlight, .voice, .voice_reply
         ]
         if !damus_state.settings.onlyzaps_mode {
             home_filter_kinds.append(.like)
@@ -861,7 +862,7 @@ class HomeModel: ContactsDelegate, ObservableObject {
             return
         }
 
-        var home_filter_kinds: [NostrKind] = [.text, .longform, .boost, .highlight]
+        var home_filter_kinds: [NostrKind] = [.text, .longform, .boost, .highlight, .voice, .voice_reply]
         if !damus_state.settings.onlyzaps_mode {
             home_filter_kinds.append(.like)
         }

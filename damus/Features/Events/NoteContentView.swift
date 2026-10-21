@@ -610,6 +610,10 @@ struct NoteContentView: View {
                     reveal_sensitive_content = true
                 }
                 .padding(.horizontal, with_padding ? 16 : 0)
+            } else if event.known_kind == .voice || event.known_kind == .voice_reply {
+                // A voice note's content is just the audio URL; show a player instead of text.
+                VoiceNoteView(damus_state: damus_state, event: event)
+                    .padding(.horizontal, with_padding ? 16 : 0)
             } else {
                 ArtifactContent
             }
