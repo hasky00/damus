@@ -66,6 +66,7 @@
 		<string>bluewallet</string>
 		<string>walletofsatoshi</string>
 		<string>blixtwallet</string>
+		<string>bitkiss</string>
 	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>

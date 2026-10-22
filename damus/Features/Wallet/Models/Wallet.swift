@@ -47,6 +47,7 @@ enum Wallet: String, CaseIterable, Identifiable, StringCodable {
     case blixtwallet
     case river
     case albygo
+    case bitkiss
     
     var model: Model {
         switch self {
@@ -96,6 +97,10 @@ enum Wallet: String, CaseIterable, Identifiable, StringCodable {
         case .albygo:
             return .init(index: 13, tag: "albygo", displayName: "Alby Go", link: "alby:",
                          appStoreLink: "https://apps.apple.com/us/app/alby-go/id6471335774", image: "alby-go")
+        case .bitkiss:
+            // Hasky Labs' own self-custodial wallet; the node runs on the phone.
+            return .init(index: 14, tag: "bitkiss", displayName: "BitKiss", link: "bitkiss:lightning:",
+                         appStoreLink: nil, image: "bitkiss")
             
         }
     }
