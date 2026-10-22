@@ -81,9 +81,10 @@ struct SpotifyLink: Equatable {
 /// play button for the preview, sized to the kind of content.
 struct SpotifyEmbedView: View {
     let link: SpotifyLink
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
-        SpotifyWebView(url: link.embedURL)
+        SpotifyWebView(url: link.embedURL, openExternal: { openURL($0) })
             .frame(height: link.kind.embedHeight)
             .clipShape(RoundedRectangle(cornerRadius: 12))
             .accessibilityLabel(NSLocalizedString("Spotify player", comment: "Accessibility label for an embedded Spotify player."))
@@ -94,6 +95,9 @@ struct SpotifyEmbedView: View {
 /// allowed to play audio inline without an extra tap.
 private struct SpotifyWebView: UIViewRepresentable {
     let url: URL
+    /// Opens a link outside the embed (Spotify app or Safari). Injected rather
+    /// than using UIApplication.shared, which the share extension cannot use.
+    let openExternal: (URL) -> Void
 
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
@@ -115,13 +119,18 @@ private struct SpotifyWebView: UIViewRepresentable {
         webView.load(URLRequest(url: url))
     }
 
-    func makeCoordinator() -> Coordinator { Coordinator() }
+    func makeCoordinator() -> Coordinator { Coordinator(openExternal: openExternal) }
 
     /// Keeps taps inside the embed, and hands anything that tries to leave it
     /// (the Spotify logo, "Save on Spotify") to the system so the Spotify app
     /// or Safari opens instead of navigating the card away.
     final class Coordinator: NSObject, WKNavigationDelegate {
         private var loading: URL?
+        private let openExternal: (URL) -> Void
+
+        init(openExternal: @escaping (URL) -> Void) {
+            self.openExternal = openExternal
+        }
 
         func isLoading(_ url: URL) -> Bool { loading == url }
 
@@ -140,7 +149,7 @@ private struct SpotifyWebView: UIViewRepresentable {
             guard navigationAction.targetFrame?.isMainFrame == true, !isEmbed, !isInitialLoad else {
                 return decisionHandler(.allow)
             }
-            UIApplication.shared.open(target)
+            openExternal(target)
             decisionHandler(.cancel)
         }
     }
