@@ -16,12 +16,15 @@ struct DamusLabsExperiments: View {
     @State var show_halloween_explainer: Bool = false
     @State var show_price_cards_explainer: Bool = false
     @State var show_text_highlights_explainer: Bool = false
+    @State var show_bot_shield_explainer: Bool = false
+    @State var bot_shield_blocked: Int = BotShield.blocked_count
     
     let favorites_label = NSLocalizedString("Favorites", comment: "Label for a toggle that enables an experimental feature")
     let gifs_label = NSLocalizedString("GIFs", comment: "Label for a toggle that enables an experimental feature")
     let halloween_label = NSLocalizedString("Halloween profile", comment: "Label for a toggle that enables an experimental feature")
     let price_cards_label = NSLocalizedString("Price Cards", comment: "Label for a toggle that enables an experimental feature")
     let text_highlights_label = NSLocalizedString("Text Highlights", comment: "Label for a toggle that enables an experimental feature")
+    let bot_shield_label = NSLocalizedString("Bot Shield", comment: "Label for a toggle that enables an experimental feature")
     
     var body: some View {
         ScrollView {
@@ -53,6 +56,21 @@ struct DamusLabsExperiments: View {
                 LabsToggleView(toggleName: halloween_label, systemImage: "moon.stars.fill", isOn: $settings.enable_halloween_profile, showInfo: $show_halloween_explainer)
                 LabsToggleView(toggleName: price_cards_label, systemImage: "chart.line.uptrend.xyaxis", isOn: $settings.enable_price_cards_feature, showInfo: $show_price_cards_explainer)
                 LabsToggleView(toggleName: text_highlights_label, systemImage: "highlighter", isOn: $settings.enable_text_highlights, showInfo: $show_text_highlights_explainer)
+                LabsToggleView(toggleName: bot_shield_label, systemImage: "shield.lefthalf.filled", isOn: $settings.enable_bot_shield, showInfo: $show_bot_shield_explainer)
+                if settings.enable_bot_shield {
+                    HStack {
+                        Text(String(format: NSLocalizedString("%d accounts blocked", comment: "Number of accounts the Bot Shield has blocked"), bot_shield_blocked))
+                            .foregroundColor(.gray)
+                        Spacer()
+                        Button(NSLocalizedString("Reset", comment: "Button that clears the Bot Shield block list")) {
+                            BotShield.reset()
+                            bot_shield_blocked = BotShield.blocked_count
+                        }
+                        .buttonStyle(.bordered)
+                    }
+                    .padding(.horizontal, 10)
+                    .onAppear { bot_shield_blocked = BotShield.blocked_count }
+                }
 
             }
             .padding([.trailing, .leading], 20)
@@ -87,6 +105,12 @@ struct DamusLabsExperiments: View {
                 labName: text_highlights_label,
                 systemImage: "highlighter",
                 labDescription: NSLocalizedString("Adds a highlighter to the composer: select some of your text and paint it yellow or pink. Highlights are stored as an extra tag on the note, so other clients still show the plain text. Notes from others carrying highlights are painted too.", comment: "Damus Labs feature explanation"))
+        }
+        .sheet(isPresented: $show_bot_shield_explainer) {
+            LabsExplainerView(
+                labName: bot_shield_label,
+                systemImage: "shield.lefthalf.filled",
+                labDescription: NSLocalizedString("Hides notes that contain adult-content keywords, #nsfw or similar hashtags, or a content warning, and from accounts whose profile name, bio or picture reads like a porn bot. Any account that trips the shield is blocked on this device, so nothing else from it is shown. The block list stays on your phone and is never published. Tap Reset to clear it.", comment: "Damus Labs feature explanation"))
         }
         .sheet(isPresented: $show_price_cards_explainer) {
             LabsExplainerView(

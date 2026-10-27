@@ -463,6 +463,10 @@ class UserSettingsStore: ObservableObject {
     /// Whether the composer offers yellow/pink text highlights and notes render them (Damus Labs)
     @Setting(key: "labs_experiment_text_highlights", default_value: false)
     var enable_text_highlights: Bool
+
+    /// Whether porn bots and adult-content spam are hidden and their authors blocked locally (Damus Labs)
+    @Setting(key: "labs_experiment_bot_shield", default_value: true)
+    var enable_bot_shield: Bool
     
     // MARK: Internal, hidden settings
     

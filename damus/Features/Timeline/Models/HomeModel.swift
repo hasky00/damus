@@ -1566,6 +1566,10 @@ func should_show_event(state: DamusState, ev: NostrEvent) -> Bool {
         return false
     }
 
+    if !BotShield.should_show(ev: ev, damus_state: state) {
+        return false
+    }
+
     return ev.should_show_event
 }
 
