@@ -71,7 +71,8 @@ class LoadableNostrEventViewModel: ObservableObject {
             case .dm:
                 let dm_model = damus_state.dms.lookup_or_create(ev.pubkey)
                 return .loaded(route: Route.DMChat(dms: dm_model))
-            case .like:
+            case .like, .label:
+                // a reaction or a fact-check label: open the note it points at
                 guard let first_referenced_note_id = ev.referenced_ids.first else { return .not_found }
                 // Pass the same relay hints - the referenced note is likely on the same relay as the reaction
                 return await self.executeLoadingLogic(note_reference: .note_id(first_referenced_note_id, relays: relays))
