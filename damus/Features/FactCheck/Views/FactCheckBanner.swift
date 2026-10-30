@@ -106,13 +106,17 @@ struct FactCheckBanner: View {
         let sources = labels.filter { $0.source != nil }.count
 
         var parts: [String] = []
-        if people > 0 {
+        if people == 1 {
+            parts.append(NSLocalizedString("1 person you follow", comment: "One followed person fact checked a note"))
+        } else if people > 1 {
             parts.append(String(format: NSLocalizedString("%d people you follow", comment: "Count of followed people who fact checked a note"), people))
         }
         if agent > 0 {
             parts.append(NSLocalizedString("1 Sniff check", comment: "Indicates the Sniff agent has fact checked a note"))
         }
-        if sources > 0 {
+        if sources == 1 {
+            parts.append(NSLocalizedString("1 source", comment: "One fact check source link"))
+        } else if sources > 1 {
             parts.append(String(format: NSLocalizedString("%d sources", comment: "Count of fact check source links"), sources))
         }
         parts.append(NSLocalizedString("tap to see", comment: "Hint to tap the fact check banner"))
