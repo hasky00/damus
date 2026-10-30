@@ -295,6 +295,10 @@ class HomeModel: ContactsDelegate, ObservableObject {
             break   // Don't care for now
         case .live, .live_chat:
             break
+        case .label:
+            if damus_state.settings.enable_fact_check {
+                FactCheckStore.shared.add(event: ev)
+            }
         case .seal, .giftwrap:
             break   // nostrdb's ingester peels these; we only ever read the rumor inside
         case .private_dm:
@@ -789,6 +793,11 @@ class HomeModel: ContactsDelegate, ObservableObject {
         // only pull status data if we care for it
         if damus_state.settings.show_music_statuses || damus_state.settings.show_general_statuses {
             home_filter_kinds.append(.status)
+        }
+
+        // fact checks from people we follow (Damus Labs)
+        if damus_state.settings.enable_fact_check {
+            home_filter_kinds.append(.label)
         }
 
         let friends = fs ?? get_friends()

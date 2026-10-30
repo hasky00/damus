@@ -460,6 +460,18 @@
 		4CC7AAF6297F1A6A00430951 /* EventBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF5297F1A6A00430951 /* EventBody.swift */; };
 		4CC7AAF8297F1CEE00430951 /* EventProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF7297F1CEE00430951 /* EventProfile.swift */; };
 		DBAAFFB2BBF4017E99DFD26B /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
+		D2D64A0A1A08E41699C74FCF /* FactCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9553B8BAC220630D81EA8 /* FactCheck.swift */; };
+		42A1C7DC7B0A88D36A58C498 /* FactCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9553B8BAC220630D81EA8 /* FactCheck.swift */; };
+		F4A121F3E04C6D862B71B1CF /* FactCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EB9553B8BAC220630D81EA8 /* FactCheck.swift */; };
+		2A2615A457F01660D9F3428C /* FactCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763A8914C7C7B6EB39456EA /* FactCheckView.swift */; };
+		9E4C65EE66F052772666F864 /* FactCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763A8914C7C7B6EB39456EA /* FactCheckView.swift */; };
+		CF7347D40A9A0E679CDE5108 /* FactCheckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4763A8914C7C7B6EB39456EA /* FactCheckView.swift */; };
+		9281C7C6D5745282588230C7 /* FactCheckBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA146A1B399C003EE1D86E /* FactCheckBanner.swift */; };
+		86874B49A59405CF07279121 /* FactCheckBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA146A1B399C003EE1D86E /* FactCheckBanner.swift */; };
+		FFF558ACCC19855D8C2C8303 /* FactCheckBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DEA146A1B399C003EE1D86E /* FactCheckBanner.swift */; };
+		8FCE9BE5C58A62D0EE90B5A0 /* FactCheckNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B43EE88C5F3B46C042F68 /* FactCheckNotify.swift */; };
+		FFBF575C8B39309E4D603B19 /* FactCheckNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B43EE88C5F3B46C042F68 /* FactCheckNotify.swift */; };
+		BB61DB0DEC25AA273CD24DD2 /* FactCheckNotify.swift in Sources */ = {isa = PBXBuildFile; fileRef = 708B43EE88C5F3B46C042F68 /* FactCheckNotify.swift */; };
 		FFF05CC79E64BEFBBFB87590 /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
 		599B3008FFD2328E2E85D197 /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
 		4CC7AAFA297F64AC00430951 /* EventMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF9297F64AC00430951 /* EventMenu.swift */; };
@@ -2773,6 +2785,10 @@
 		4CC7AAF5297F1A6A00430951 /* EventBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBody.swift; sourceTree = "<group>"; };
 		4CC7AAF7297F1CEE00430951 /* EventProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfile.swift; sourceTree = "<group>"; };
 		5E860735DE8F6D00964F124B /* BlackEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackEye.swift; sourceTree = "<group>"; };
+		0EB9553B8BAC220630D81EA8 /* FactCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCheck.swift; sourceTree = "<group>"; };
+		4763A8914C7C7B6EB39456EA /* FactCheckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCheckView.swift; sourceTree = "<group>"; };
+		9DEA146A1B399C003EE1D86E /* FactCheckBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCheckBanner.swift; sourceTree = "<group>"; };
+		708B43EE88C5F3B46C042F68 /* FactCheckNotify.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FactCheckNotify.swift; sourceTree = "<group>"; };
 		4CC7AAF9297F64AC00430951 /* EventMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenu.swift; sourceTree = "<group>"; };
 		4CCEB7AD29B53D260078AA28 /* SearchingEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingEventView.swift; sourceTree = "<group>"; };
 		4CD348EE29C3659D00497EB2 /* ImageUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadModel.swift; sourceTree = "<group>"; };
@@ -3795,6 +3811,7 @@
 		4CA3529C2A76AE47003BB08B /* Notify */ = {
 			isa = PBXGroup;
 			children = (
+				708B43EE88C5F3B46C042F68 /* FactCheckNotify.swift */,
 				D5C1AFC92E5EE12B0092F72F /* ContactCardNotify.swift */,
 				D706C5B62D602A050027C627 /* QueueableNotify.swift */,
 				D7EB00AF2CD59C8300660C07 /* PresentFullScreenItemNotify.swift */,
@@ -4647,6 +4664,7 @@
 		5C78A7792E22FDFE00CF177D /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				85E67534D86056808FC7A59A /* FactCheck */,
 				5C8F97042EB45E39009399B1 /* Live */,
 				D5C1AFC22E5DFF040092F72F /* ContactCard */,
 				5C78A7BC2E304D7400CF177D /* Translations */,
@@ -5610,6 +5628,32 @@
 				5CB6459B2EA31D750018BD91 /* LabsIntroduction.swift */,
 				5CB645972EA317CC0018BD91 /* DamusLabs.swift */,
 				5CB6459F2EA31E2C0018BD91 /* Detail */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		85E67534D86056808FC7A59A /* FactCheck */ = {
+			isa = PBXGroup;
+			children = (
+				1C7D85BA55ADF9E8F69330C2 /* Models */,
+				5424E8D714829438112A9EE9 /* Views */,
+			);
+			path = FactCheck;
+			sourceTree = "<group>";
+		};
+		1C7D85BA55ADF9E8F69330C2 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0EB9553B8BAC220630D81EA8 /* FactCheck.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5424E8D714829438112A9EE9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4763A8914C7C7B6EB39456EA /* FactCheckView.swift */,
+				9DEA146A1B399C003EE1D86E /* FactCheckBanner.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -6928,6 +6972,10 @@
 				D7CB5D4E2B11728000AD4105 /* NewEventsBits.swift in Sources */,
 				4CC7AAFA297F64AC00430951 /* EventMenu.swift in Sources */,
 				DBAAFFB2BBF4017E99DFD26B /* BlackEye.swift in Sources */,
+				D2D64A0A1A08E41699C74FCF /* FactCheck.swift in Sources */,
+				2A2615A457F01660D9F3428C /* FactCheckView.swift in Sources */,
+				9281C7C6D5745282588230C7 /* FactCheckBanner.swift in Sources */,
+				8FCE9BE5C58A62D0EE90B5A0 /* FactCheckNotify.swift in Sources */,
 				B57B4C622B312BD700A232C0 /* ReconnectRelaysNotify.swift in Sources */,
 				D767066F2C8BB3CF00F09726 /* URLHandler.swift in Sources */,
 				D7ADD3DE2B53854300F104C4 /* DamusPurpleURL.swift in Sources */,
@@ -7591,6 +7639,10 @@
 				82D6FC352CD99F7900C925F4 /* EventProfile.swift in Sources */,
 				82D6FC362CD99F7900C925F4 /* EventMenu.swift in Sources */,
 				FFF05CC79E64BEFBBFB87590 /* BlackEye.swift in Sources */,
+				42A1C7DC7B0A88D36A58C498 /* FactCheck.swift in Sources */,
+				9E4C65EE66F052772666F864 /* FactCheckView.swift in Sources */,
+				86874B49A59405CF07279121 /* FactCheckBanner.swift in Sources */,
+				FFBF575C8B39309E4D603B19 /* FactCheckNotify.swift in Sources */,
 				D7AAD0002E0387B800FB7699 /* LnurlAmountView.swift in Sources */,
 				82D6FC372CD99F7900C925F4 /* EventMutingContainerView.swift in Sources */,
 				5CFDE6F62EF4F93D004E8661 /* Secrets.swift in Sources */,
@@ -8074,6 +8126,10 @@
 				D73E5F302C6A97F4007EB227 /* EventProfile.swift in Sources */,
 				D73E5F312C6A97F4007EB227 /* EventMenu.swift in Sources */,
 				599B3008FFD2328E2E85D197 /* BlackEye.swift in Sources */,
+				F4A121F3E04C6D862B71B1CF /* FactCheck.swift in Sources */,
+				CF7347D40A9A0E679CDE5108 /* FactCheckView.swift in Sources */,
+				FFF558ACCC19855D8C2C8303 /* FactCheckBanner.swift in Sources */,
+				BB61DB0DEC25AA273CD24DD2 /* FactCheckNotify.swift in Sources */,
 				D73E5F322C6A97F4007EB227 /* EventMutingContainerView.swift in Sources */,
 				D75154C12EC5910A00BF2CB2 /* NdbUseLock.swift in Sources */,
 				D73E5F332C6A97F4007EB227 /* ZapEvent.swift in Sources */,

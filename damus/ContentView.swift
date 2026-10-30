@@ -23,6 +23,7 @@ struct SelectWallet {
 enum Sheets: Identifiable {
     case post(PostAction)
     case report(ReportTarget)
+    case fact_check(NostrEvent)
     case event(NostrEvent)
     case profile_action(Pubkey)
     case zap(ZapSheet)
@@ -45,6 +46,7 @@ enum Sheets: Identifiable {
     var id: String {
         switch self {
         case .report: return "report"
+        case .fact_check(let ev): return "fact-check-" + ev.id.hex()
         case .user_status: return "user_status"
         case .post(let action): return "post-" + (action.ev?.id.hex() ?? "")
         case .event(let ev): return "event-" + ev.id.hex()
@@ -239,6 +241,16 @@ struct ContentView: View {
         }
     }
     
+    func MaybeFactCheckView(note: NostrEvent) -> some View {
+        Group {
+            if let keypair = damus_state.keypair.to_full() {
+                FactCheckView(damus_state: damus_state, note: note, keypair: keypair)
+            } else {
+                EmptyView()
+            }
+        }
+    }
+
     func open_event(ev: NostrEvent) {
         let thread = ThreadModel(event: ev, damus_state: damus_state!)
         navigationCoordinator.push(route: Route.Thread(thread: thread))
@@ -322,6 +334,8 @@ struct ContentView: View {
             switch item {
             case .report(let target):
                 MaybeReportView(target: target)
+            case .fact_check(let note):
+                MaybeFactCheckView(note: note)
             case .post(let action):
                 PostView(action: action, damus_state: damus_state!)
             case .user_status:
@@ -378,6 +392,9 @@ struct ContentView: View {
         }
         .onReceive(handle_notify(.report)) { target in
             self.active_sheet = .report(target)
+        }
+        .onReceive(handle_notify(.fact_check)) { note in
+            self.active_sheet = .fact_check(note)
         }
         .onReceive(handle_notify(.mute)) { mute_item in
             self.muting = mute_item

@@ -471,6 +471,14 @@ class UserSettingsStore: ObservableObject {
     /// Whether the note menu offers Black Eye: block the author everywhere and report the note in one tap (Damus Labs)
     @Setting(key: "labs_experiment_black_eye", default_value: true)
     var enable_black_eye: Bool
+
+    /// Whether community fact checks (NIP-32 labels) are shown under notes and offered in the note menu (Damus Labs)
+    @Setting(key: "labs_experiment_fact_check", default_value: true)
+    var enable_fact_check: Bool
+
+    /// URL of the Sniff fact-checking agent. Empty hides the "Ask Sniff" button. (Damus Labs)
+    @Setting(key: "labs_fact_check_agent_url", default_value: "")
+    var fact_check_agent_url: String
     
     // MARK: Internal, hidden settings
     

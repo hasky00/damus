@@ -49,6 +49,7 @@ enum NostrKind: UInt32, Codable {
     /// A NIP-A0 voice message posted as a reply to another note.
     case voice_reply = 1244
     case live_chat = 1311
+    case label = 1985
     case mute_list = 10000
     case relay_list = 10002
     /// A NIP-17 DM inbox relay list: the relays a user wants their private messages delivered to.

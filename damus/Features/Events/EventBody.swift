@@ -71,6 +71,10 @@ struct EventBody: View {
                 }
         } else {
             note_content
+            if damus_state.settings.enable_fact_check {
+                FactCheckBanner(damus_state: damus_state, event: event)
+                    .padding(.top, 6)
+            }
         }
     }
 }

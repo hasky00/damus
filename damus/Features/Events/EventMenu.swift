@@ -173,6 +173,14 @@ struct MenuItems: View {
                         Label(NSLocalizedString("Black Eye", comment: "Context menu option that blocks the author everywhere and reports the note in one tap."), systemImage: "hand.raised.fill")
                     }
                 }
+
+                if actions.contains(.report) && damus_state.settings.enable_fact_check {
+                    Button {
+                        notify(.fact_check(event))
+                    } label: {
+                        Label(NSLocalizedString("Fact check", comment: "Context menu option that opens the fact check sheet for a note."), systemImage: "pawprint.fill")
+                    }
+                }
                 
                 MuteDurationMenu { duration in
                     notify(.mute(.user(target_pubkey, duration?.date_from_now)))
