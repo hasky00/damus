@@ -17,6 +17,7 @@ struct DamusLabsExperiments: View {
     @State var show_price_cards_explainer: Bool = false
     @State var show_text_highlights_explainer: Bool = false
     @State var show_bot_shield_explainer: Bool = false
+    @State var show_black_eye_explainer: Bool = false
     @State var bot_shield_blocked: Int = BotShield.blocked_count
     
     let favorites_label = NSLocalizedString("Favorites", comment: "Label for a toggle that enables an experimental feature")
@@ -25,6 +26,7 @@ struct DamusLabsExperiments: View {
     let price_cards_label = NSLocalizedString("Price Cards", comment: "Label for a toggle that enables an experimental feature")
     let text_highlights_label = NSLocalizedString("Text Highlights", comment: "Label for a toggle that enables an experimental feature")
     let bot_shield_label = NSLocalizedString("Bot Shield", comment: "Label for a toggle that enables an experimental feature")
+    let black_eye_label = NSLocalizedString("Black Eye", comment: "Label for a toggle that enables an experimental feature")
     
     var body: some View {
         ScrollView {
@@ -71,6 +73,7 @@ struct DamusLabsExperiments: View {
                     .padding(.horizontal, 10)
                     .onAppear { bot_shield_blocked = BotShield.blocked_count }
                 }
+                LabsToggleView(toggleName: black_eye_label, systemImage: "hand.raised.fill", isOn: $settings.enable_black_eye, showInfo: $show_black_eye_explainer)
 
             }
             .padding([.trailing, .leading], 20)
@@ -105,6 +108,12 @@ struct DamusLabsExperiments: View {
                 labName: text_highlights_label,
                 systemImage: "highlighter",
                 labDescription: NSLocalizedString("Adds a highlighter to the composer: select some of your text and paint it yellow or pink. Highlights are stored as an extra tag on the note, so other clients still show the plain text. Notes from others carrying highlights are painted too.", comment: "Damus Labs feature explanation"))
+        }
+        .sheet(isPresented: $show_black_eye_explainer) {
+            LabsExplainerView(
+                labName: black_eye_label,
+                systemImage: "hand.raised.fill",
+                labDescription: NSLocalizedString("Adds a Black Eye option to the note menu. One tap blocks the author on this device, adds them to your public mute list so the block follows you to every client, and publishes a report for the note so relay operators and other clients can drop them too. Pick Spam bot, Porn bot or Impersonator to say why.", comment: "Damus Labs feature explanation"))
         }
         .sheet(isPresented: $show_bot_shield_explainer) {
             LabsExplainerView(

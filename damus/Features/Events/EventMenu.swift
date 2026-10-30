@@ -151,6 +151,28 @@ struct MenuItems: View {
                         Label(NSLocalizedString("Report", comment: "Context menu option for reporting content."), image: "raising-hand")
                     }
                 }
+
+                if actions.contains(.report) && damus_state.settings.enable_black_eye {
+                    Menu {
+                        Button(role: .destructive) {
+                            Task { await BlackEye.punch(event: event, damus_state: damus_state, type: .spam) }
+                        } label: {
+                            Label(NSLocalizedString("Spam bot", comment: "Black Eye option: block and report the author as spam"), systemImage: "trash.slash")
+                        }
+                        Button(role: .destructive) {
+                            Task { await BlackEye.punch(event: event, damus_state: damus_state, type: .nudity) }
+                        } label: {
+                            Label(NSLocalizedString("Porn bot", comment: "Black Eye option: block and report the author for nudity"), systemImage: "eye.slash")
+                        }
+                        Button(role: .destructive) {
+                            Task { await BlackEye.punch(event: event, damus_state: damus_state, type: .impersonation) }
+                        } label: {
+                            Label(NSLocalizedString("Impersonator", comment: "Black Eye option: block and report the author for impersonation"), systemImage: "person.crop.circle.badge.xmark")
+                        }
+                    } label: {
+                        Label(NSLocalizedString("Black Eye", comment: "Context menu option that blocks the author everywhere and reports the note in one tap."), systemImage: "hand.raised.fill")
+                    }
+                }
                 
                 MuteDurationMenu { duration in
                     notify(.mute(.user(target_pubkey, duration?.date_from_now)))

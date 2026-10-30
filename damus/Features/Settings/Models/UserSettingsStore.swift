@@ -467,6 +467,10 @@ class UserSettingsStore: ObservableObject {
     /// Whether porn bots and adult-content spam are hidden and their authors blocked locally (Damus Labs)
     @Setting(key: "labs_experiment_bot_shield", default_value: true)
     var enable_bot_shield: Bool
+
+    /// Whether the note menu offers Black Eye: block the author everywhere and report the note in one tap (Damus Labs)
+    @Setting(key: "labs_experiment_black_eye", default_value: true)
+    var enable_black_eye: Bool
     
     // MARK: Internal, hidden settings
     

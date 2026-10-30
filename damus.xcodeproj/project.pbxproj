@@ -459,6 +459,9 @@
 		4CC7AAF4297F18B400430951 /* ReplyDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF3297F18B400430951 /* ReplyDescription.swift */; };
 		4CC7AAF6297F1A6A00430951 /* EventBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF5297F1A6A00430951 /* EventBody.swift */; };
 		4CC7AAF8297F1CEE00430951 /* EventProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF7297F1CEE00430951 /* EventProfile.swift */; };
+		DBAAFFB2BBF4017E99DFD26B /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
+		FFF05CC79E64BEFBBFB87590 /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
+		599B3008FFD2328E2E85D197 /* BlackEye.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E860735DE8F6D00964F124B /* BlackEye.swift */; };
 		4CC7AAFA297F64AC00430951 /* EventMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC7AAF9297F64AC00430951 /* EventMenu.swift */; };
 		4CCEB7AE29B53D260078AA28 /* SearchingEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCEB7AD29B53D260078AA28 /* SearchingEventView.swift */; };
 		4CD348EF29C3659D00497EB2 /* ImageUploadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CD348EE29C3659D00497EB2 /* ImageUploadModel.swift */; };
@@ -2769,6 +2772,7 @@
 		4CC7AAF3297F18B400430951 /* ReplyDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyDescription.swift; sourceTree = "<group>"; };
 		4CC7AAF5297F1A6A00430951 /* EventBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventBody.swift; sourceTree = "<group>"; };
 		4CC7AAF7297F1CEE00430951 /* EventProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventProfile.swift; sourceTree = "<group>"; };
+		5E860735DE8F6D00964F124B /* BlackEye.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackEye.swift; sourceTree = "<group>"; };
 		4CC7AAF9297F64AC00430951 /* EventMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventMenu.swift; sourceTree = "<group>"; };
 		4CCEB7AD29B53D260078AA28 /* SearchingEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchingEventView.swift; sourceTree = "<group>"; };
 		4CD348EE29C3659D00497EB2 /* ImageUploadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploadModel.swift; sourceTree = "<group>"; };
@@ -4137,6 +4141,7 @@
 				4CC7AAEA297F0AEC00430951 /* BuilderEventView.swift */,
 				4CC7AAF7297F1CEE00430951 /* EventProfile.swift */,
 				4CC7AAF9297F64AC00430951 /* EventMenu.swift */,
+				5E860735DE8F6D00964F124B /* BlackEye.swift */,
 				4CF0ABE6298444FC00D66079 /* EventMutingContainerView.swift */,
 				4C3D52B7298DB5C6001C5831 /* TextEvent.swift */,
 				4CFF8F6C29CD022E008DB934 /* WideEventView.swift */,
@@ -6922,6 +6927,7 @@
 				4CEE2AF1280B216B00AB5EEF /* EventDetailView.swift in Sources */,
 				D7CB5D4E2B11728000AD4105 /* NewEventsBits.swift in Sources */,
 				4CC7AAFA297F64AC00430951 /* EventMenu.swift in Sources */,
+				DBAAFFB2BBF4017E99DFD26B /* BlackEye.swift in Sources */,
 				B57B4C622B312BD700A232C0 /* ReconnectRelaysNotify.swift in Sources */,
 				D767066F2C8BB3CF00F09726 /* URLHandler.swift in Sources */,
 				D7ADD3DE2B53854300F104C4 /* DamusPurpleURL.swift in Sources */,
@@ -7584,6 +7590,7 @@
 				82D6FC342CD99F7900C925F4 /* BuilderEventView.swift in Sources */,
 				82D6FC352CD99F7900C925F4 /* EventProfile.swift in Sources */,
 				82D6FC362CD99F7900C925F4 /* EventMenu.swift in Sources */,
+				FFF05CC79E64BEFBBFB87590 /* BlackEye.swift in Sources */,
 				D7AAD0002E0387B800FB7699 /* LnurlAmountView.swift in Sources */,
 				82D6FC372CD99F7900C925F4 /* EventMutingContainerView.swift in Sources */,
 				5CFDE6F62EF4F93D004E8661 /* Secrets.swift in Sources */,
@@ -8066,6 +8073,7 @@
 				D73E5F2E2C6A97F4007EB227 /* EventBody.swift in Sources */,
 				D73E5F302C6A97F4007EB227 /* EventProfile.swift in Sources */,
 				D73E5F312C6A97F4007EB227 /* EventMenu.swift in Sources */,
+				599B3008FFD2328E2E85D197 /* BlackEye.swift in Sources */,
 				D73E5F322C6A97F4007EB227 /* EventMutingContainerView.swift in Sources */,
 				D75154C12EC5910A00BF2CB2 /* NdbUseLock.swift in Sources */,
 				D73E5F332C6A97F4007EB227 /* ZapEvent.swift in Sources */,
