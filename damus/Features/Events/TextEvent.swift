@@ -55,27 +55,32 @@ struct TextEvent: View {
         }
     }
 
+    @ViewBuilder
     func EvBody(options: EventViewOptions) -> some View {
         let blur_imgs = should_blur_images(settings: damus.settings, contacts: damus.contacts, ev: event, our_pubkey: damus.pubkey)
         
         if options.contains(.small_text) {
-            return NoteContentView(
+            NoteContentView(
                 damus_state: damus,
                 event: event,
                 blur_images: blur_imgs,
                 size: .small,
                 options: options,
                 highlightTerms: highlightTerms)
+        } else {
+            NoteContentView(
+                damus_state: damus,
+                event: event,
+                blur_images: blur_imgs,
+                size: .normal,
+                options: options,
+                highlightTerms: highlightTerms
+            )
+            if damus.settings.enable_fact_check {
+                FactCheckBanner(damus_state: damus, event: event)
+                    .padding(.top, 6)
+            }
         }
-        
-        return NoteContentView(
-            damus_state: damus,
-            event: event,
-            blur_images: blur_imgs,
-            size: .normal,
-            options: options,
-            highlightTerms: highlightTerms
-        )
     }
 
 }
