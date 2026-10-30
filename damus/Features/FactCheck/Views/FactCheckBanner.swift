@@ -17,7 +17,8 @@ struct FactCheckBanner: View {
     @State private var show_all: Bool = false
 
     var all_labels: [FactCheckLabel] {
-        store.labels(for: event.id)
+        store.sync_agent(from: damus_state.settings)
+        return store.labels(for: event.id)
     }
 
     /// Labels from people you follow, yourself, or the Sniff agent.

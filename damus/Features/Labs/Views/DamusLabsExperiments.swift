@@ -77,6 +77,23 @@ struct DamusLabsExperiments: View {
                 }
                 LabsToggleView(toggleName: black_eye_label, systemImage: "hand.raised.fill", isOn: $settings.enable_black_eye, showInfo: $show_black_eye_explainer)
                 LabsToggleView(toggleName: fact_check_label, systemImage: "pawprint.fill", isOn: $settings.enable_fact_check, showInfo: $show_fact_check_explainer)
+                if settings.enable_fact_check {
+                    VStack(alignment: .leading, spacing: 6) {
+                        TextField(NSLocalizedString("Sniff address (https://.../check)", comment: "Placeholder for the Sniff fact check agent URL"), text: $settings.fact_check_agent_url)
+                            .keyboardType(.URL)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .textFieldStyle(.roundedBorder)
+                        TextField(NSLocalizedString("Sniff npub", comment: "Placeholder for the Sniff fact check agent npub"), text: $settings.fact_check_agent_npub)
+                            .textInputAutocapitalization(.never)
+                            .autocorrectionDisabled()
+                            .textFieldStyle(.roundedBorder)
+                        Text("Leave both empty to use Fact Check without the Sniff agent.", comment: "Hint under the Sniff agent fields")
+                            .font(.caption)
+                            .foregroundColor(.gray)
+                    }
+                    .padding(.horizontal, 10)
+                }
 
             }
             .padding([.trailing, .leading], 20)

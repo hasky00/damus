@@ -479,6 +479,10 @@ class UserSettingsStore: ObservableObject {
     /// URL of the Sniff fact-checking agent. Empty hides the "Ask Sniff" button. (Damus Labs)
     @Setting(key: "labs_fact_check_agent_url", default_value: "")
     var fact_check_agent_url: String
+
+    /// npub of the Sniff fact-checking agent, so its verdicts get the paw. (Damus Labs)
+    @Setting(key: "labs_fact_check_agent_npub", default_value: "")
+    var fact_check_agent_npub: String
     
     // MARK: Internal, hidden settings
     

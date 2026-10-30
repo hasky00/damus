@@ -136,8 +136,21 @@ final class FactCheckStore: ObservableObject {
     @Published private(set) var labels: [NoteId: [FactCheckLabel]] = [:]
     private var seen: Set<NoteId> = []
 
-    /// Pubkey of the Sniff agent, once it has a key. Labels from it get a paw icon.
+    /// Pubkey of the Sniff agent, from the npub in Labs settings. Labels from it get a paw icon.
     var agent_pubkey: Pubkey? = nil
+
+    /// Re-read the agent npub from settings (cheap; called by the banner).
+    func sync_agent(from settings: UserSettingsStore) {
+        let npub = settings.fact_check_agent_npub.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !npub.isEmpty else { agent_pubkey = nil; return }
+        if let pk = bech32_pubkey_decode(npub) {
+            agent_pubkey = pk
+        } else if let pk = Pubkey(hex: npub) {
+            agent_pubkey = pk
+        } else {
+            agent_pubkey = nil
+        }
+    }
 
     func add(event ev: NostrEvent) {
         guard !seen.contains(ev.id), let label = FactCheckLabel(event: ev) else { return }

@@ -815,6 +815,16 @@ class HomeModel: ContactsDelegate, ObservableObject {
             home_filters.append(hashtag_filter)
         }
 
+        // Sniff's fact-check verdicts, even though we don't follow the agent (Damus Labs)
+        if damus_state.settings.enable_fact_check {
+            FactCheckStore.shared.sync_agent(from: damus_state.settings)
+            if let agent = FactCheckStore.shared.agent_pubkey, !friends.contains(agent) {
+                var agent_filter = NostrFilter(kinds: [.label], authors: [agent])
+                agent_filter.limit = 200
+                home_filters.append(agent_filter)
+            }
+        }
+
         self.homeHandlerTask?.cancel()
         self.homeHandlerTask = Task {
             let startTime = CFAbsoluteTimeGetCurrent()
