@@ -460,6 +460,10 @@ class UserSettingsStore: ObservableObject {
     @Setting(key: "labs_experiment_halloween_profile", default_value: false)
     var enable_halloween_profile: Bool
 
+    /// Whether your own display name is painted with a yellow to pink gradient (Damus Labs)
+    @Setting(key: "labs_experiment_colourful_name", default_value: true)
+    var enable_colourful_name: Bool
+
     /// Whether the composer offers yellow/pink text highlights and notes render them (Damus Labs)
     @Setting(key: "labs_experiment_text_highlights", default_value: false)
     var enable_text_highlights: Bool

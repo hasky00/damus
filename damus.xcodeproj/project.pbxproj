@@ -1203,8 +1203,11 @@
 		9C83F89329A937B900136C08 /* TextViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C83F89229A937B900136C08 /* TextViewWrapper.swift */; };
 		9CA876E229A00CEA0003B9A3 /* AttachMediaUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA876E129A00CE90003B9A3 /* AttachMediaUtility.swift */; };
 		A1B2C3D4E5F60718293A4B5D /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
+		C0104F01E5F60718293A4B61 /* ColourfulName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0104F01E5F60718293A4B60 /* ColourfulName.swift */; };
 		A1B2C3D4E5F60718293A4B5E /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
+		C0104F01E5F60718293A4B62 /* ColourfulName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0104F01E5F60718293A4B60 /* ColourfulName.swift */; };
 		A1B2C3D4E5F60718293A4B5F /* HalloweenProfileDecoration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */; };
+		C0104F01E5F60718293A4B63 /* ColourfulName.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0104F01E5F60718293A4B60 /* ColourfulName.swift */; };
 		ABE98D51D7DF44DAAD333D5E /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = 5A958478DCE24724BA3B6460 /* Sentry */; };
 		ADFE73552AD4793100EC7326 /* QRScanNSECView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFE73542AD4793100EC7326 /* QRScanNSECView.swift */; };
 		B501062D2B363036003874F5 /* AuthIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B501062C2B363036003874F5 /* AuthIntegrationTests.swift */; };
@@ -3020,6 +3023,7 @@
 		9C83F89229A937B900136C08 /* TextViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextViewWrapper.swift; sourceTree = "<group>"; };
 		9CA876E129A00CE90003B9A3 /* AttachMediaUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachMediaUtility.swift; sourceTree = "<group>"; };
 		A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HalloweenProfileDecoration.swift; sourceTree = "<group>"; };
+		C0104F01E5F60718293A4B60 /* ColourfulName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColourfulName.swift; sourceTree = "<group>"; };
 		A79A2486CFF78DDCC79DC060 /* Ndb+Prune.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Ndb+Prune.swift"; sourceTree = "<group>"; };
 		ADFE73542AD4793100EC7326 /* QRScanNSECView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRScanNSECView.swift; sourceTree = "<group>"; };
 		B501062C2B363036003874F5 /* AuthIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthIntegrationTests.swift; sourceTree = "<group>"; usesTabs = 0; };
@@ -4962,6 +4966,7 @@
 				4CEE2AF2280B25C500AB5EEF /* ProfilePicView.swift */,
 				4C8682862814DE470026224F /* ProfileView.swift */,
 				A1B2C3D4E5F60718293A4B5C /* HalloweenProfileDecoration.swift */,
+				C0104F01E5F60718293A4B60 /* ColourfulName.swift */,
 				4CB9D4A62992D02B00A9A7E4 /* ProfileNameView.swift */,
 				4C9F18E329ABDE6D008C55EC /* MaybeAnonPfpView.swift */,
 				4C9BB83329C12D9900FC4E37 /* EventProfileName.swift */,
@@ -6788,6 +6793,7 @@
 				D724D8272B64B40B00ABE789 /* DamusPurpleAccountView.swift in Sources */,
 				4C8682872814DE470026224F /* ProfileView.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5D /* HalloweenProfileDecoration.swift in Sources */,
+				C0104F01E5F60718293A4B61 /* ColourfulName.swift in Sources */,
 				5C0707D12A1ECB38004E7B51 /* DamusLogoGradient.swift in Sources */,
 				4CDD1AE02A6B305F001CD4DF /* NdbTagElem.swift in Sources */,
 				4C5F9114283D694D0052CD1C /* FollowTarget.swift in Sources */,
@@ -7588,6 +7594,7 @@
 				82D6FC0E2CD99F7900C925F4 /* ProfilePicView.swift in Sources */,
 				82D6FC0F2CD99F7900C925F4 /* ProfileView.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5E /* HalloweenProfileDecoration.swift in Sources */,
+				C0104F01E5F60718293A4B62 /* ColourfulName.swift in Sources */,
 				82D6FC102CD99F7900C925F4 /* ProfileNameView.swift in Sources */,
 				D7E5B2D52EA0188200CF47AC /* StreamPipelineDiagnostics.swift in Sources */,
 				5CB017212D2D985E00A9ED05 /* CoinosButton.swift in Sources */,
@@ -8077,6 +8084,7 @@
 				D73E5F092C6A97F4007EB227 /* ProfilePicView.swift in Sources */,
 				D73E5F0A2C6A97F4007EB227 /* ProfileView.swift in Sources */,
 				A1B2C3D4E5F60718293A4B5F /* HalloweenProfileDecoration.swift in Sources */,
+				C0104F01E5F60718293A4B63 /* ColourfulName.swift in Sources */,
 				D73E5F0B2C6A97F4007EB227 /* ProfileNameView.swift in Sources */,
 				D73E5F0C2C6A97F4007EB227 /* MaybeAnonPfpView.swift in Sources */,
 				D73E5F0D2C6A97F4007EB227 /* EventProfileName.swift in Sources */,

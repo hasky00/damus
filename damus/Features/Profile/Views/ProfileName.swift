@@ -101,6 +101,7 @@ struct ProfileName: View {
             Text(verbatim: "\(prefix)\(name_choice(profile: profile))")
                 .font(.body)
                 .fontWeight(prefix == "@" ? .none : .bold)
+                .colourfulName(prefix != "@" && ColourfulName.applies(to: pubkey, damus: damus_state))
 
             if let nip05 = current_nip05 {
                 NIP05Badge(nip05: nip05, pubkey: pubkey, damus_state: damus_state, show_domain: show_nip5_domain, nip05_domain_favicon: nip05_domain_favicon)

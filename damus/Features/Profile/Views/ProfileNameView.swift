@@ -27,6 +27,7 @@ struct ProfileNameView: View {
                 case .both(username: _, displayName: let displayName):
                     Text(displayName)
                         .font(.title3.weight(.bold))
+                        .colourfulName(ColourfulName.applies(to: pubkey, damus: damus))
                     
                     HStack(alignment: .center, spacing: spacing) {
                         ProfileName(pubkey: pubkey, prefix: "@", damus: damus, supporterBadgeStyle: .full)

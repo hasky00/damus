@@ -67,6 +67,7 @@ struct EventProfileName: View {
                     .font(.body.weight(.bold))
                     .font(eventviewsize_to_font(size, font_size: damus_state.settings.font_size))
                     .fontWeight(.bold)
+                    .colourfulName(ColourfulName.applies(to: pubkey, damus: damus_state))
                 
             case .both(username: let username, displayName: let displayName):
                     HStack(spacing: 6) {
@@ -74,6 +75,7 @@ struct EventProfileName: View {
                             .font(.body.weight(.bold))
                             .font(eventviewsize_to_font(size, font_size: damus_state.settings.font_size))
                             .fontWeight(.bold)
+                            .colourfulName(ColourfulName.applies(to: pubkey, damus: damus_state))
                         
                         Text(verbatim: "@\(username)")
                             .foregroundColor(.gray)

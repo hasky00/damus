@@ -15,6 +15,7 @@ struct DamusLabsExperiments: View {
     @State var show_gifs_explainer: Bool = false
     @State var show_halloween_explainer: Bool = false
     @State var show_price_cards_explainer: Bool = false
+    @State var show_colourful_name_explainer: Bool = false
     @State var show_text_highlights_explainer: Bool = false
     @State var show_bot_shield_explainer: Bool = false
     @State var show_black_eye_explainer: Bool = false
@@ -25,6 +26,7 @@ struct DamusLabsExperiments: View {
     let gifs_label = NSLocalizedString("GIFs", comment: "Label for a toggle that enables an experimental feature")
     let halloween_label = NSLocalizedString("Halloween profile", comment: "Label for a toggle that enables an experimental feature")
     let price_cards_label = NSLocalizedString("Price Cards", comment: "Label for a toggle that enables an experimental feature")
+    let colourful_name_label = NSLocalizedString("Colourful Name", comment: "Label for a toggle that enables an experimental feature")
     let text_highlights_label = NSLocalizedString("Text Highlights", comment: "Label for a toggle that enables an experimental feature")
     let bot_shield_label = NSLocalizedString("Bot Shield", comment: "Label for a toggle that enables an experimental feature")
     let black_eye_label = NSLocalizedString("Black Eye", comment: "Label for a toggle that enables an experimental feature")
@@ -59,6 +61,7 @@ struct DamusLabsExperiments: View {
                 LabsToggleView(toggleName: gifs_label, systemImage: "smiley", isOn: $settings.enable_gifs_feature, showInfo: $show_gifs_explainer)
                 LabsToggleView(toggleName: halloween_label, systemImage: "moon.stars.fill", isOn: $settings.enable_halloween_profile, showInfo: $show_halloween_explainer)
                 LabsToggleView(toggleName: price_cards_label, systemImage: "chart.line.uptrend.xyaxis", isOn: $settings.enable_price_cards_feature, showInfo: $show_price_cards_explainer)
+                LabsToggleView(toggleName: colourful_name_label, systemImage: "paintpalette.fill", isOn: $settings.enable_colourful_name, showInfo: $show_colourful_name_explainer)
                 LabsToggleView(toggleName: text_highlights_label, systemImage: "highlighter", isOn: $settings.enable_text_highlights, showInfo: $show_text_highlights_explainer)
                 LabsToggleView(toggleName: bot_shield_label, systemImage: "shield.lefthalf.filled", isOn: $settings.enable_bot_shield, showInfo: $show_bot_shield_explainer)
                 if settings.enable_bot_shield {
@@ -122,6 +125,12 @@ struct DamusLabsExperiments: View {
                 labName: halloween_label,
                 systemImage: "moon.stars.fill",
                 labDescription: NSLocalizedString("Decorates profile pages with a pulsing orange and purple ring around the profile picture and bats and pumpkins drifting over the banner. This is a local theme only you see, and it is never shown on the timeline or on notes. If Reduce Motion is on, the ring stays still and the drifting is skipped.", comment: "Damus Labs feature explanation"))
+        }
+        .sheet(isPresented: $show_colourful_name_explainer) {
+            LabsExplainerView(
+                labName: colourful_name_label,
+                systemImage: "paintpalette.fill",
+                labDescription: NSLocalizedString("Paints your own name with a yellow to pink gradient on your profile, in the timeline and in chats. This is a local look in this app only: nothing is published, and other clients keep showing your plain name.", comment: "Damus Labs feature explanation"))
         }
         .sheet(isPresented: $show_text_highlights_explainer) {
             LabsExplainerView(
